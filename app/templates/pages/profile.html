@@ -1,0 +1,18 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Profile</h2>
+    <div class="card">
+        <div class="card-header">
+            User Profile
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ session['username'] }}</h5>
+            <p class="card-text">Email: {{ session.get('email', 'Not available') }}</p>
+            <!-- Add other profile information as needed -->
+            <a href="{{ url_for('settings') }}" class="btn btn-primary">Edit Settings</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

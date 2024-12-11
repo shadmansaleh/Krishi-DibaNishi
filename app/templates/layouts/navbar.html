@@ -4,22 +4,41 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto px-2">
+        <ul class="navbar-nav ml-auto px-2">
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/crop_suggestion">Crop Suggestion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/weather_prediction">Weather Prediction</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/market_prices">Market Prices</a>
-            </li>
-             {% if session.get('logged_in') %}
+            {% if session.get('logged_in') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                    <a class="nav-link" href="/crop_suggestion">Crop Suggestion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/weather_prediction">Weather Prediction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/market_prices">Market Prices</a>
+                </li>
+            {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/about_us">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/faq">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact_us">Contact</a>
+                </li>
+            {% if session.get('logged_in') %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ session.get('username') }}
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a>
+                    <a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                  </div>
                 </li>
             {% else %}
                 <li class="nav-item">

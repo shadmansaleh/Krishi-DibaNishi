@@ -22,7 +22,7 @@ Krishi Dibanishi is a basic web application designed to assist farmers by provid
 ### Steps
 1. Clone the repository:
 ```bash
-   git clone <repository-url>
+   git clone https://github.com/shadmansaleh/KrishiDibaNishi
    cd krishi-dibanishi
 ```
 2. Create and activate a virtual environment:

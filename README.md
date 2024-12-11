@@ -22,26 +22,32 @@ Krishi Dibanishi is a basic web application designed to assist farmers by provid
 ### Steps
 1. Clone the repository:
 ```bash
-   git clone https://github.com/shadmansaleh/KrishiDibaNishi
-   cd krishi-dibanishi
+git clone https://github.com/shadmansaleh/Krishi-DibaNishi
+cd krishi-dibanishi
 ```
 2. Create and activate a virtual environment:
 
 
 ```bash
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
+```
+
+4. Set Up the Database
+    a. Initialize Database
+```bash
+flask db upgrade
 ```
 
 4. Run the app:
 ```bash
-    python run.py
+python run.py
 ```
 
 5. Open your browser and visit:
@@ -50,14 +56,17 @@ pip install -r requirements.txt
 ### Folder Structure
 
 ```python
-/krishi-dibanishi
+/Krishi-DibaNishi
     /run.py              # Entry point to start the app
     /config.py           # Application configuration settings
     /app                 # Main application code
         /__init__.py     # Initializes the Flask app
-        /api.py          # Api endpoints
-        /views.py        # Routes and logic
-        /models.py       # (Future scope) Database models
+        /templates/      # HTML templates
+        /routes/         # All route handlers
+          /api.py        # Api endpoints
+          /views.py      # Webpage router from pages/
+          /auth.py       # Authentication handler
+        /models.py       # Database models
         /static/         # Static assets (CSS, JS, images)
         /templates/      # HTML templates
           /layouts/      # Layout-related templates
@@ -72,7 +81,7 @@ pip install -r requirements.txt
 This project is open-source. Feel free to modify and distribute as per the terms of the license.
 
 ### Credits
-- [Shadman Saleh](https://github.com/shadmansaleh) [email](mailto://shadmansaleh3@gmail.com)
+- [Shadman Saleh](https://github.com/shadmansaleh) [shadmansaleh3@gmail.com](mailto://shadmansaleh3@gmail.com)
 - [Ratnajit Dhar]() [email]()
 - [Arpita Mallik]() [email]()
 - [Faozia Fariha]() [email]()

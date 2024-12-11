@@ -1,5 +1,39 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<p>This is your homepage!</p>
+<section class="hero-section text-center">
+  <div class="container">
+    <h1>Welcome to Krishi Dibanishi</h1>
+    <p>Helping farmers with crop suggestions, weather predictions, and market prices</p>
+    <a href="#features" class="btn btn-primary btn-lg">Explore Features</a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="container text-center my-5">
+  <h2 class="mb-4">Our Features</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="feature-box">
+        <i class="fas fa-seedling"></i>
+        <h3>Crop Suggestion</h3>
+        <p>Get personalized crop recommendations based on weather, soil, and season.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-box">
+        <i class="fas fa-cloud-sun"></i>
+        <h3>Weather Prediction</h3>
+        <p>Stay updated with accurate weather forecasts to plan your farming activities.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="feature-box">
+        <i class="fas fa-chart-line"></i>
+        <h3>Market Prices</h3>
+        <p>Get real-time market prices for your crops to make informed selling decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

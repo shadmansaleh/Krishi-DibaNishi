@@ -1,6 +1,7 @@
 from flask import Flask
-from app.views import pages, register_pages
-from app.api import api
+from app.routes.views import pages, register_pages
+from app.routes.api import api
+from app.routes.auth import auth
 
 def create_app():
     app = Flask(__name__)
@@ -8,6 +9,7 @@ def create_app():
 
     # Register the Blueprint
     app.register_blueprint(pages)
+    app.register_blueprint(auth)
     app.register_blueprint(api)
 
     register_pages(app)

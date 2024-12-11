@@ -19,6 +19,7 @@ def register_pages(app):
                 # Create a dynamic view function for each page
                 view_func = lambda file=file: render_template(f"pages/{os.path.relpath(dirpath, pages_folder)}/{file}")
 
+                print(route, file)
                 # Register the route with the app
                 app.add_url_rule(route, file.split('.')[0], view_func)
 

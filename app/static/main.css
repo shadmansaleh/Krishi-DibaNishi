@@ -1,35 +1,8 @@
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 0;
-}
-
-.navbar {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar li {
-    margin: 0 15px;
-}
-
-.navbar a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
-
-.navbar a:hover {
-    text-decoration: underline;
 }
 
 footer {
@@ -41,4 +14,53 @@ footer {
     bottom: 0;
     width: 100%;
     font-size: 14px;
+}
+
+/* login styles */
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 50px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.form-control {
+  margin-bottom: 15px;
+}
+
+/* landing page */
+.hero-section {
+  background-image: url('https://images.unsplash.com/photo-1483871788521-4f224a86e166?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Placeholder image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+}
+
+.feature-box {
+  padding: 40px;
+  text-align: center;
+}
+
+.feature-box i {
+  font-size: 3rem;
+  color: #007bff;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.navbar {
+  margin-bottom: 50px;
 }

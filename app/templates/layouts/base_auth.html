@@ -1,0 +1,11 @@
+{% extends "layouts/base.html" %}
+
+{% block auth %}
+    {% if not session.get('logged_in') %}
+        <script>
+            window.location.href = "{{ url_for('auth.login') }}";
+        </script>
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}

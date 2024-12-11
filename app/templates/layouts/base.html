@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Dibanishi</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <header>
+        {% include 'layouts/navbar.html' %}
+        <h1>Welcome to Krishi Dibanishi!</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+     <footer>
+        {% include 'layouts/footer.html' %}
+    </footer>
+</body>
+</html>

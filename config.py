@@ -1,5 +1,7 @@
+import os
+
 class Config:
-    SECRET_KEY = '0c7ab0d3367a815720b2021cf4294059'
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = True

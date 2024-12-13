@@ -12,6 +12,9 @@ Krishi Dibanishi is a basic web application designed to assist farmers by provid
 3. **Market Prices**
    - Displays the latest market prices for crops, enabling farmers to make informed decisions.
 
+4. **Soil Tips**
+   - Suggests tips for how to improve the soil
+
 ## Installation
 
 ### Prerequisites
@@ -25,27 +28,43 @@ Krishi Dibanishi is a basic web application designed to assist farmers by provid
 git clone https://github.com/shadmansaleh/Krishi-DibaNishi
 cd krishi-dibanishi
 ```
-2. Create and activate a virtual environment:
-
+2. Create a virtual environment:
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. Activate virtual environtment:
+
+- On Linux
+```bash
+source .venv/bin/activate
+```
+
+- On Windows
+```bash
+source .venv\Scripts\activate
+```
+
+4. Install dependencies:
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-4. Set Up the Database
-    a. Initialize Database
+5. Setup environment:
+
+```bash
+cp .env.example .env
+```
+Then edit .env to fill it with required secrete values
+
+6. Set Up the Database:
 ```bash
 flask db upgrade
 ```
 
-4. Run the app:
+7. Run the app:
 ```bash
 python run.py
 ```
@@ -56,12 +75,11 @@ python run.py
 ### Folder Structure
 
 ```python
-/Krishi-DibaNishi
+/Krishi-DibaNishi/
     /run.py              # Entry point to start the app
     /config.py           # Application configuration settings
-    /app                 # Main application code
+    /app/                # Main application code
         /__init__.py     # Initializes the Flask app
-        /templates/      # HTML templates
         /routes/         # All route handlers
           /api.py        # Api endpoints
           /views.py      # Webpage router from pages/
@@ -74,6 +92,7 @@ python run.py
           /partials/     # Reusable partial components
     /requirements.txt    # Python dependencies
     /.venv               # Virtual environment (not included in repository)
+    /.env                # Environtment file for holding secretes
 ```
 
 ### License
@@ -81,7 +100,7 @@ python run.py
 This project is open-source. Feel free to modify and distribute as per the terms of the license.
 
 ### Credits
-- [Shadman Saleh](https://github.com/shadmansaleh) [shadmansaleh3@gmail.com](mailto://shadmansaleh3@gmail.com)
-- [Ratnajit Dhar]() [email]()
-- [Arpita Mallik]() [email]()
-- [Faozia Fariha]() [email]()
+- [Shadman Saleh](https://github.com/shadmansaleh) ([shadmansaleh3@gmail.com](mailto://shadmansaleh3@gmail.com))
+- [Ratnajit Dhar](https://github.com/ratnajit-dhar) ([rdpratnajit@gmail.com](mailto://rdpratnajit@gmail.com))
+- [Arpita Mallik](https://github.com/ArpitaMallik) ([arpitamallik13@gmail.com](mailto://arpitamallik13@gmail.com))
+- [Faozia Fariha](https://github.com/bountyhunter12) ([faoziafariha058@gmail.com](mailto://faoziafariha058@gmail.com))

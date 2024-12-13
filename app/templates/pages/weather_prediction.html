@@ -1,7 +1,7 @@
 {% extends 'layouts/base_auth.html' %}
 
 {% block title %}
-Weather Prediction
+Weather Prediction - Krishi Dibanishi
 {% endblock %}
 
 {% block content %}
@@ -26,11 +26,11 @@ Weather Prediction
 <!-- todays forecast -->
 <div id="currentWeatherCard" class="card mb-4" style="display: none;">
     <div class="card-body">
-        <div class="row">
+        <div class="row g-4">
             <div class="col-md-4">
                 <img id="currentIcon" class="card-img-top" alt="Weather Icon" style="max-width: 400px;">
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6 ms-auto">
                 <h5 class="card-title" id="currentLocation"></h5>
                 <p id="currentDescription"></p>
                 <p><strong>Temperature:</strong> <span id="currentTemperature"></span>°C</p>
@@ -76,7 +76,7 @@ Weather Prediction
                     // Update current weather card
                     const currentWeather = response.current;
                     $("#currentLocation").text(currentWeather.location);
-                    $("#currentIcon").attr("src", `http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`);
+                    $("#currentIcon").attr("src", `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`);
                     $("#currentDescription").text(currentWeather.description);
                     $("#currentTemperature").text(currentWeather.temperature);
                     $("#currentHumidity").text(currentWeather.humidity);
@@ -94,11 +94,11 @@ Weather Prediction
                     $("#forecastDetails").empty();  // Clear previous forecast cards
                     forecastDetails.forEach(function (day) {
                         const forecastDay = `
-                            <div class="col-md-2 mb-3">
+                            <div class="col-md-2 mb-3 mx-auto">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <h6 class="card-title">${day.date}</h6>
-                                        <img src="http://openweathermap.org/img/wn/${day.icon}@2x.png" class="card-img-top" alt="Weather Icon">
+                                        <img src="https://openweathermap.org/img/wn/${day.icon}@2x.png" class="card-img-top" alt="Weather Icon">
                                         <p class="card-text">${day.description}</p>
                                         <p><strong>Temp:</strong> ${day.temperature}°C</p>
                                     </div>
@@ -112,7 +112,7 @@ Weather Prediction
                     $("#forecastCard").show();
                 },
                 error: function () {
-                    alert("Failed to load weather data. Please try again.");
+                    console.log("Failed to load weather data. Please try again.");
                 }
             });
         }

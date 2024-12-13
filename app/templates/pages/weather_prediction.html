@@ -23,99 +23,39 @@ Weather Prediction
     </div>
 </div>
 
-<div id="weatherCard" class="card mt-4" style="display: none;">
-    <div class="card-header">
-        <h4 id="weatherLocation"></h4>
-    </div>
+<!-- todays forecast -->
+<div id="currentWeatherCard" class="card mb-4" style="display: none;">
     <div class="card-body">
-        <div class="row d-flex align-items-stretch">
-
-            <!-- Weather Icon Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-info text-white">
-                    <img id="weatherIcon" class="card-img-top" alt="Weather Icon">
-                    <div class="card-body">
-                        <p class="card-text" id="weatherDescription"></p>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img id="currentIcon" class="card-img-top" alt="Weather Icon" style="max-width: 400px;">
             </div>
-
-            <!-- Temperature Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-warning text-dark">
-                    <div class="card-body">
-                        <h5 class="card-title">Temperature</h5>
-                        <p id="weatherTemp"></p> <span>°C</span>
-                    </div>
-                </div>
+            <div class="col-md-8">
+                <h5 class="card-title" id="currentLocation"></h5>
+                <p id="currentDescription"></p>
+                <p><strong>Temperature:</strong> <span id="currentTemperature"></span>°C</p>
+                <p><strong>Humidity:</strong> <span id="currentHumidity"></span>%</p>
+                <p><strong>Wind Speed:</strong> <span id="currentWindSpeed"></span> m/s</p>
+                <p><strong>Pressure:</strong> <span id="currentPressure"></span> hPa</p>
+                <p><strong>Cloudiness:</strong> <span id="currentCloudiness"></span>%</p>
+                <p><strong>Sunrise:</strong> <span id="currentSunrise"></span></p>
+                <p><strong>Sunset:</strong> <span id="currentSunset"></span></p>
             </div>
-
-            <!-- Humidity Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-success text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Humidity</h5>
-                        <p id="weatherHumidity"></p> <span>%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Wind Speed Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-primary text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Wind Speed</h5>
-                        <p id="weatherWind"></p> <span>m/s</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pressure Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-secondary text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Pressure</h5>
-                        <p id="weatherPressure"></p> <span>hPa</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cloudiness Card -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-dark text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Cloudiness</h5>
-                        <p id="weatherCloud"></p> <span>%</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sunrise and Sunset Cards -->
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-danger text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Sunrise</h5>
-                        <p id="weatherSunrise"></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 mb-3">
-                <div class="card h-100 text-center bg-danger text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Sunset</h5>
-                        <p id="weatherSunset"></p>
-                    </div>
-                </div>
-            </div>
-
         </div>
+    </div>
+</div>
+
+<!-- 5-Day Forecast Weather -->
+<div id="forecastCard" class="card mb-4" style="display: none;">
+    <div class="card-body">
+        <h5 class="card-title">5-Day Forecast</h5>
+        <div id="forecastDetails" class="row"></div>
     </div>
 </div>
 
 <script>
     $(document).ready(function () {
-        // Load weather for Chittagong by default
+        // Load weather data for Chittagong by default
         fetchWeather("Chittagong");
 
         // Handle location change
@@ -133,38 +73,49 @@ Weather Prediction
                 contentType: "application/json",
                 data: JSON.stringify({ location: location }),
                 success: function (response) {
-                    $("#weatherLocation").text(response.location);
-                    $("#weatherDescription").text(response.description);
-                    $("#weatherTemp").text(response.temperature);
-                    $("#weatherHumidity").text(response.humidity);
-                    $("#weatherWind").text(response.wind_speed);
-                    $("#weatherPressure").text(response.pressure);
-                    $("#weatherCloud").text(response.cloudiness);
-                    $("#weatherSunrise").text(formatTime(response.sunrise));
-                    $("#weatherSunset").text(formatTime(response.sunset));
-                    $("#weatherIcon").attr("src", `http://openweathermap.org/img/wn/${response.icon}@2x.png`);
-                    $("#weatherCard").show();
+                    // Update current weather card
+                    const currentWeather = response.current;
+                    $("#currentLocation").text(currentWeather.location);
+                    $("#currentIcon").attr("src", `http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`);
+                    $("#currentDescription").text(currentWeather.description);
+                    $("#currentTemperature").text(currentWeather.temperature);
+                    $("#currentHumidity").text(currentWeather.humidity);
+                    $("#currentWindSpeed").text(currentWeather.wind_speed);
+                    $("#currentPressure").text(currentWeather.pressure);
+                    $("#currentCloudiness").text(currentWeather.cloudiness);
+                    $("#currentSunrise").text(new Date(currentWeather.sunrise * 1000).toLocaleTimeString());
+                    $("#currentSunset").text(new Date(currentWeather.sunset * 1000).toLocaleTimeString());
+
+                    // Show current weather card
+                    $("#currentWeatherCard").show();
+
+                    // Update forecast card
+                    const forecastDetails = response.forecast;
+                    $("#forecastDetails").empty();  // Clear previous forecast cards
+                    forecastDetails.forEach(function (day) {
+                        const forecastDay = `
+                            <div class="col-md-2 mb-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${day.date}</h6>
+                                        <img src="http://openweathermap.org/img/wn/${day.icon}@2x.png" class="card-img-top" alt="Weather Icon">
+                                        <p class="card-text">${day.description}</p>
+                                        <p><strong>Temp:</strong> ${day.temperature}°C</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $("#forecastDetails").append(forecastDay);
+                    });
+
+                    // Show forecast card
+                    $("#forecastCard").show();
                 },
                 error: function () {
                     alert("Failed to load weather data. Please try again.");
                 }
             });
         }
-
-        // Helper to format time from Unix timestamp (in seconds)
-        function formatTime(timestamp) {
-            const date = new Date(timestamp * 1000);
-            return date.toLocaleTimeString();
-        }
-    });
-</script>
-
-<!-- You can add select2 for a searchable city input -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#locationInput').select2();
     });
 </script>
 {% endblock %}

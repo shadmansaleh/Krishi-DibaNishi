@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from ..models import User  # Assuming you're using SQLAlchemy for the User model
+from ..models import User, UserType  # Assuming you're using SQLAlchemy for the User model
 from .. import db
 
 auth = Blueprint('auth', __name__)
@@ -19,6 +19,7 @@ def login():
             session['user_id'] = user.id
             session['username'] = user.username
             session['email'] = user.email
+            session['is_admin'] = user.usertype == UserType.admin
             flash('Login successful!', 'success')
             return redirect(url_for('pages.index'))
         else:
@@ -32,6 +33,7 @@ def logout():
     session.pop('username', None)
     session.pop('user_id', None)
     session.pop('email', None)
+    session.pop('is_admin', None)
     flash('You have been logged out.', 'info')
     return redirect(url_for('pages.index'))
 
@@ -84,9 +86,9 @@ def update_settings():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        
+
         user = User.query.filter_by(username=session['username']).first()
-        
+
         # Update the user details
         if username != user.username:
             user.username = username

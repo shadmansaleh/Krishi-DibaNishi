@@ -3,7 +3,7 @@
 {% block auth %}
     {% if not session.get('logged_in') %}
         <script>
-            window.location.href = "{{ url_for('auth.login') }}";
+            window.location.href = "/login";
         </script>
     {% else %}
         {{ super() }}

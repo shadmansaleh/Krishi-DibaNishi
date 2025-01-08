@@ -4,8 +4,130 @@
 Market Prices - Krishi Dibanishi
 {% endblock %}
 
-
 {% block content %}
 <h2>Market Prices</h2>
 <p>Find the latest market prices for your crops!</p>
+
+<input type="text" id="searchBar" class="form-control my-3" placeholder="Search for crops...">
+
+<table id="marketPricesTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th id="cropHeader" style="cursor: pointer;">Crop <span class="sort-icon"></span></th>
+            <th id="regionHeader" style="cursor: pointer;">Region <span class="sort-icon"></span></th>
+            <th id="priceHeader" style="cursor: pointer;">Price (per kg) <span class="sort-icon"></span></th>
+            <th id="retailPriceHeader" style="cursor: pointer;">Price-retail (per kg) <span class="sort-icon"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be dynamically populated -->
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        let sortOrder = {
+            crop: true,
+            region: true,
+            price: true,
+            retailPrice: true
+        };
+
+        // Fetch data from API
+        $.ajax({
+            url: "/api/market-prices",
+            method: "GET",
+            success: function(data) {
+                const tableBody = $("#marketPricesTable tbody");
+                tableBody.empty();  // Clear existing table rows before appending new data
+                $.each(data, function(index, item) {
+                    const row = `<tr>
+                        <td>${item.crop}</td>
+                        <td>${item.region}</td>
+                        <td>${item.price_per_kg}</td>
+                        <td>${item.price_per_kg_retail}</td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            },
+            error: function() {
+                alert("Failed to fetch market prices. Please try again later.");
+            }
+        });
+
+        // Implement search functionality
+        $("#searchBar").on("keyup", function() {
+            const query = $(this).val().toLowerCase();
+            $("#marketPricesTable tbody tr").each(function() {
+                const crop = $(this).find("td:first").text().toLowerCase();
+                $(this).toggle(crop.includes(query));
+            });
+        });
+
+        // Sorting functionality
+        function sortTable(column, isAscending) {
+            const rows = $("#marketPricesTable tbody tr").get();
+            rows.sort(function(a, b) {
+                const cellA = $(a).children("td").eq(column).text().toLowerCase();
+                const cellB = $(b).children("td").eq(column).text().toLowerCase();
+
+                if ($.isNumeric(cellA) && $.isNumeric(cellB)) {
+                    // Numeric comparison
+                    return isAscending ? parseFloat(cellA) - parseFloat(cellB) : parseFloat(cellB) - parseFloat(cellA);
+                } else {
+                    // String comparison
+                    return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                }
+            });
+
+            // Append the sorted rows back to the table body
+            $.each(rows, function(index, row) {
+                $("#marketPricesTable tbody").append(row);
+            });
+
+            // Update the sort icon
+            updateSortIcon(column, isAscending);
+        }
+
+        // Update sort icon based on sorting state
+        function updateSortIcon(column, isAscending) {
+            // Remove any previous sort icons
+            $(".sort-icon").text('');
+
+            // Set the new sort icon
+            const icon = isAscending ? '▲' : '▼';
+
+            if (column === 0) {
+                $("#cropHeader .sort-icon").text(icon);
+            } else if (column === 1) {
+                $("#regionHeader .sort-icon").text(icon);
+            } else if (column === 2) {
+                $("#priceHeader .sort-icon").text(icon);
+            } else if (column === 3) {
+                $("#retailPriceHeader .sort-icon").text(icon);
+            }
+        }
+
+        // Sort when headers are clicked
+        $("#cropHeader").click(function() {
+            sortOrder.crop = !sortOrder.crop;
+            sortTable(0, sortOrder.crop);
+        });
+
+        $("#regionHeader").click(function() {
+            sortOrder.region = !sortOrder.region;
+            sortTable(1, sortOrder.region);
+        });
+
+        $("#priceHeader").click(function() {
+            sortOrder.price = !sortOrder.price;
+            sortTable(2, sortOrder.price);
+        });
+
+        $("#retailPriceHeader").click(function() {
+            sortOrder.retailPrice = !sortOrder.retailPrice;
+            sortTable(3, sortOrder.retailPrice);
+        });
+    });
+</script>
 {% endblock %}

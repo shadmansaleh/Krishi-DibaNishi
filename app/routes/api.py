@@ -1,4 +1,7 @@
 from flask import Blueprint, jsonify, request
+import traceback
+from app.models import Prices
+from app.extensions import db
 import requests
 import os
 
@@ -11,8 +14,70 @@ def get_crop_suggestions():
 
 @api.route("/market-prices", methods=["GET"])
 def get_market_prices():
-    prices = {"Wheat": 20, "Rice": 15, "Corn": 25}
+    prices_data = Prices.query.all()
+    prices = [
+        {
+            "id": item.id,
+            "crop": item.crop,
+            "region": item.region,
+            "price_per_kg": item.price_per_kg,
+            "price_per_kg_retail": item.price_per_kg_retail
+        }
+        for item in prices_data
+    ]
     return jsonify(prices)
+
+# Get a specific price
+@api.route('/market-prices/<int:id>', methods=['GET'])
+def get_price(id):
+    price = Prices.query.get_or_404(id)
+    return jsonify({
+        'id': price.id,
+        'crop': price.crop,
+        'region': price.region,
+        'price_per_kg': price.price_per_kg,
+        'price_per_kg_retail': price.price_per_kg_retail
+    })
+
+# Add a new price
+@api.route('/market-prices', methods=['POST'])
+def add_price():
+    try:
+        data = request.get_json()
+        price = Prices(
+            crop=data['crop'],
+            region=data['region'],
+            price_per_kg=data['price_per_kg'],
+            price_per_kg_retail=data['price_per_kg_retail']
+        )
+        db.session.add(price)
+        db.session.commit()
+        return jsonify({'message': 'Price added successfully!'}), 201
+    except Exception as e:
+        print(f"Error: {e}")
+        print("Stack Trace:")
+        print(traceback.format_exc())
+        return jsonify({'message': 'Failed to add price'}), 500
+
+# Update an existing price
+@api.route('/market-prices/<int:id>', methods=['PUT'])
+def update_price(id):
+    data = request.get_json()
+    price = Prices.query.get_or_404(id)
+    price.crop = data['crop']
+    price.region = data['region']
+    price.price_per_kg = data['price_per_kg']
+    price.price_per_kg_retail = data['price_per_kg_retail']
+    db.session.commit()
+    return jsonify({'message': 'Price updated successfully!'})
+
+# Delete a price
+@api.route('/market-prices/<int:id>', methods=['DELETE'])
+def delete_price(id):
+    price = Prices.query.get_or_404(id)
+    db.session.delete(price)
+    db.session.commit()
+    return jsonify({'message': 'Price deleted successfully!'})
 
 @api.route('/weather', methods=['POST'])
 def get_weather():

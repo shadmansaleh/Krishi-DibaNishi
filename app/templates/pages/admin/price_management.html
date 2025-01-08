@@ -1,0 +1,174 @@
+{% extends "layouts/base_auth_admin.html" %}
+
+{% block title %}
+Price Management - Krishi Dibanishi
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Prices</h2>
+
+    <button id="addPriceBtn" class="btn btn-primary mb-3">Add New Price</button>
+
+    <!-- Table to List Prices -->
+    <table id="pricesTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Crop</th>
+                <th>Region</th>
+                <th>Price per kg</th>
+                <th>Retail Price per kg</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Prices will be loaded dynamically here -->
+        </tbody>
+    </table>
+
+    <!-- Modal for Add/Edit Price -->
+    <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="priceModalLabel">Add/Edit Price</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="priceForm">
+                        <div class="mb-3">
+                            <label for="crop" class="form-label">Crop</label>
+                            <input type="text" class="form-control" id="crop" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="region" class="form-label">Region</label>
+                            <input type="text" class="form-control" id="region" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price_per_kg" class="form-label">Price per kg</label>
+                            <input type="number" class="form-control" id="price_per_kg" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price_per_kg_retail" class="form-label">Retail Price per kg</label>
+                            <input type="number" class="form-control" id="price_per_kg_retail" required>
+                        </div>
+                        <input type="hidden" id="price_id">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        // Fetch prices on page load
+        fetchPrices();
+
+        // Add Price
+        $('#addPriceBtn').click(function() {
+            $('#priceModalLabel').text('Add New Price');
+            $('#priceForm')[0].reset();
+            $('#price_id').val('');
+            $('#priceModal').removeClass('fade');
+            $('#priceModal').modal('show');
+        });
+
+        // Edit Price
+        $(document).on('click', '.edit-btn', function() {
+            const id = $(this).data('id');
+            $.get(`/api/market-prices/${id}`, function(data) {
+                $('#priceModalLabel').text('Edit Price');
+                $('#crop').val(data.crop);
+                $('#region').val(data.region);
+                $('#price_per_kg').val(data.price_per_kg);
+                $('#price_per_kg_retail').val(data.price_per_kg_retail);
+                $('#price_id').val(data.id);
+                $('#priceModal').removeClass('fade');
+                $('#priceModal').modal('show');
+            });
+        });
+
+        // Delete Price
+        $(document).on('click', '.delete-btn', function() {
+            const id = $(this).data('id');
+            if (confirm('Are you sure you want to delete this price?')) {
+                $.ajax({
+                    url: `/api/market-prices/${id}`,
+                    type: 'DELETE',
+                    success: function(result) {
+                        fetchPrices();
+                    }
+                });
+            }
+        });
+
+        // Save Price (Add/Edit)
+        $('#priceForm').submit(function(e) {
+            e.preventDefault();
+            const id = $('#price_id').val();
+            const priceData = {
+                crop: $('#crop').val(),
+                region: $('#region').val(),
+                price_per_kg: $('#price_per_kg').val(),
+                price_per_kg_retail: $('#price_per_kg_retail').val(),
+            };
+
+            if (id) {
+                // Update Price
+                $.ajax({
+                    url: `/api/market-prices/${id}`,
+                    type: 'PUT',
+                    contentType: 'application/json',
+                    data: JSON.stringify(priceData),
+                    success: function(result) {
+                        fetchPrices();
+                        $('#priceModal').modal('hide');
+                    }
+                });
+            } else {
+                // Add Price
+                $.post({
+                    url: '/api/market-prices',
+                    contentType: 'application/json',
+                    data: JSON.stringify(priceData),
+                    success: function(result) {
+                        fetchPrices();  // Refresh the prices
+                        $('#priceModal').addClass('fade');
+                        $('#priceModal').modal('hide');  // Close the modal
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+        });
+
+        // Fetch Prices from API
+        function fetchPrices() {
+            $.get('/api/market-prices', function(data) {
+                const pricesTable = $('#pricesTable tbody');
+                pricesTable.empty();
+                data.forEach(price => {
+                    pricesTable.append(`
+                        <tr>
+                            <td>${price.crop}</td>
+                            <td>${price.region}</td>
+                            <td>${price.price_per_kg}</td>
+                            <td>${price.price_per_kg_retail}</td>
+                            <td>
+                                <button class="btn btn-warning edit-btn" data-id="${price.id}">Edit</button>
+                                <button class="btn btn-danger delete-btn" data-id="${price.id}">Delete</button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+        }
+    });
+</script>
+{% endblock %}

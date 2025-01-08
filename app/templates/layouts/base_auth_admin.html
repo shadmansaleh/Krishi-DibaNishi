@@ -1,0 +1,11 @@
+{% extends "layouts/base_auth.html" %}
+
+{% block auth %}
+    {% if not session.get('is_admin') %}
+        <script>
+            window.location.href = "{{ url_for('pages.index') }}";
+        </script>
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}

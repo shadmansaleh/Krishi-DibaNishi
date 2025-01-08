@@ -8,7 +8,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            {% if session.get('logged_in') %}
+            {% if session.get('logged_in') and not session.get('is_admin')%}
                 <li class="nav-item">
                     <a class="nav-link" href="/crop_suggestion">Crop Suggestion</a>
                 </li>
@@ -22,6 +22,12 @@
                     <a class="nav-link" href="/soil_health">Soil Health</a>
                 </li>
             {% endif %}
+            {% if session.get('logged_in') and session.get('is_admin')%}
+              <li class="nav-item">
+                  <a class="nav-link" href="/admin/price_management">Price Management</a>
+              </li>
+            {% endif %}
+            {% if not session.get('is_admin')%}
             <li class="nav-item">
                 <a class="nav-link" href="/about_us">About us</a>
             </li>
@@ -31,6 +37,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="/contact_us">Contact</a>
             </li>
+            {% endif %}
             {% if session.get('logged_in') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

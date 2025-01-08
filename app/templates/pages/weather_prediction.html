@@ -1,124 +1,126 @@
 {% extends 'layouts/base_auth.html' %}
 
 {% block title %}
-Weather Prediction - Krishi Dibanishi
+আবহাওয়া পূর্বাভাস - ৃষি দিবানিশিি
 {% endblock %}
 
 {% block content %}
-<h2>Weather Forecast</h2>
-<p>Checkout latest weather updates for your region</p>
+<h2>আবহাওয়া পূর্বাভাস</h2>
+<p>আপনার অঞ্চলের সর্বশেষ আবহাওয়ার আপডেট দেখুন</p>
 
 <div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="locationInput">Choose Location</label>
-            <select id="locationInput" class="form-control">
-                <option value="Chittagong" selected>Chittagong</option>
-                <option value="Dhaka">Dhaka</option>
-                <option value="Rajshahi">Rajshahi</option>
-                <option value="Khulna">Khulna</option>
-                <option value="Sylhet">Sylhet</option>
-                <option value="Barisal">Barisal</option>
-                <option value="Rangpur">Rangpur</option>
-                <option value="Mymensingh">Mymensingh</option>
-            </select>
-        </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <label for="locationInput">অবস্থান নির্বাচন করুন</label>
+      <select id="locationInput" class="form-control">
+        <option value="Chittagong" selected>চট্টগ্রাম</option>
+        <option value="Dhaka">ঢাকা</option>
+        <option value="Rajshahi">রাজশাহী</option>
+        <option value="Khulna">খুলনা</option>
+        <option value="Sylhet">সিলেট</option>
+        <option value="Barisal">বরিশাল</option>
+        <option value="Rangpur">রংপুর</option>
+        <option value="Mymensingh">ময়মনসিংহ</option>
+      </select>
     </div>
+  </div>
 </div>
 
 <!-- todays forecast -->
 <div id="currentWeatherCard" class="card mb-4" style="display: none;">
-    <div class="card-body">
-        <div class="row g-4">
-            <div class="col-md-4">
-                <img id="currentIcon" class="card-img-top" alt="Weather Icon" style="max-width: 400px;">
-            </div>
-            <div class="col-md-6 ms-auto">
-                <h5 class="card-title" id="currentLocation"></h5>
-                <p id="currentDescription"></p>
-                <p><strong>Temperature:</strong> <span id="currentTemperature"></span>°C</p>
-                <p><strong>Humidity:</strong> <span id="currentHumidity"></span>%</p>
-                <p><strong>Wind Speed:</strong> <span id="currentWindSpeed"></span> m/s</p>
-                <p><strong>Pressure:</strong> <span id="currentPressure"></span> hPa</p>
-                <p><strong>Cloudiness:</strong> <span id="currentCloudiness"></span>%</p>
-                <p><strong>Sunrise:</strong> <span id="currentSunrise"></span></p>
-                <p><strong>Sunset:</strong> <span id="currentSunset"></span></p>
-            </div>
-        </div>
+  <div class="card-body">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <img id="currentIcon" class="card-img-top" alt="আবহাওয়ার আইকন" style="max-width: 400px;">
+      </div>
+      <div class="col-md-6 ms-auto">
+        <h5 class="card-title" id="currentLocation"></h5>
+        <p id="currentDescription"></p>
+        <p><strong>তাপমাত্রা:</strong> <span id="currentTemperature"></span>°C</p>
+        <p><strong>আর্দ্রতা:</strong> <span id="currentHumidity"></span>%</p>
+        <p><strong>বাতাসের গতি:</strong> <span id="currentWindSpeed"></span> মিটার/সেকেন্ড</p>
+        <p><strong>চাপ:</strong> <span id="currentPressure"></span> hPa</p>
+        <p><strong>মেঘাচ্ছন্নতা:</strong> <span id="currentCloudiness"></span>%</p>
+        <p><strong>সূর্যোদয়:</strong> <span id="currentSunrise"></span></p>
+        <p><strong>সূর্যাস্ত:</strong> <span id="currentSunset"></span></p>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- 5-Day Forecast Weather -->
 <div id="forecastCard" class="card mb-4" style="display: none;">
-    <div class="card-body">
-        <h5 class="card-title">5-Day Forecast</h5>
-        <div id="forecastDetails" class="row"></div>
-    </div>
+  <div class="card-body">
+    <h5 class="card-title">৫ দিনের আবহাওয়া পূর্বাভাস</h5>
+    <div id="forecastDetails" class="row"></div>
+  </div>
 </div>
 
 <script>
-    $(document).ready(function () {
-        // Load weather data for Chittagong by default
-        fetchWeather("Chittagong");
+  $(document).ready(function() {
+    // Load weather data for Chittagong by default
+    fetchWeather("Chittagong");
 
-        // Handle location change
-        $("#locationInput").on("change", function () {
-            const location = $(this).val();
-            if (location) {
-                fetchWeather(location);
-            }
-        });
+    // Handle location change
+    $("#locationInput").on("change", function() {
+      const location = $(this).val();
+      if (location) {
+        fetchWeather(location);
+      }
+    });
 
-        function fetchWeather(location) {
-            $.ajax({
-                url: "/api/weather",
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify({ location: location }),
-                success: function (response) {
-                    // Update current weather card
-                    const currentWeather = response.current;
-                    $("#currentLocation").text(currentWeather.location);
-                    $("#currentIcon").attr("src", `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`);
-                    $("#currentDescription").text(currentWeather.description);
-                    $("#currentTemperature").text(currentWeather.temperature);
-                    $("#currentHumidity").text(currentWeather.humidity);
-                    $("#currentWindSpeed").text(currentWeather.wind_speed);
-                    $("#currentPressure").text(currentWeather.pressure);
-                    $("#currentCloudiness").text(currentWeather.cloudiness);
-                    $("#currentSunrise").text(new Date(currentWeather.sunrise * 1000).toLocaleTimeString());
-                    $("#currentSunset").text(new Date(currentWeather.sunset * 1000).toLocaleTimeString());
+    function fetchWeather(location) {
+      $.ajax({
+        url: "/api/weather",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+          location: location
+        }),
+        success: function(response) {
+          // Update current weather card
+          const currentWeather = response.current;
+          $("#currentLocation").text(translateWordToBangla(currentWeather.location));
+          $("#currentIcon").attr("src", `https://openweathermap.org/img/wn/${currentWeather.icon}@4x.png`);
+          $("#currentDescription").text(currentWeather.description);
+          $("#currentTemperature").text(convertToBanglaNumbers(currentWeather.temperature));
+          $("#currentHumidity").text(convertToBanglaNumbers(currentWeather.humidity));
+          $("#currentWindSpeed").text(convertToBanglaNumbers(currentWeather.wind_speed));
+          $("#currentPressure").text(convertToBanglaNumbers(currentWeather.pressure));
+          $("#currentCloudiness").text(convertToBanglaNumbers(currentWeather.cloudiness));
+          $("#currentSunrise").text(convertToBanglaNumbers(new Date(currentWeather.sunrise * 1000).toLocaleTimeString()));
+          $("#currentSunset").text(convertToBanglaNumbers(new Date(currentWeather.sunset * 1000).toLocaleTimeString()));
 
-                    // Show current weather card
-                    $("#currentWeatherCard").show();
+          // Show current weather card
+          $("#currentWeatherCard").show();
 
-                    // Update forecast card
-                    const forecastDetails = response.forecast;
-                    $("#forecastDetails").empty();  // Clear previous forecast cards
-                    forecastDetails.forEach(function (day) {
-                        const forecastDay = `
+          // Update forecast card
+          const forecastDetails = response.forecast;
+          $("#forecastDetails").empty(); // Clear previous forecast cards
+          forecastDetails.forEach(function(day) {
+            const forecastDay = `
                             <div class="col-md-2 mb-3 mx-auto">
                                 <div class="card text-center">
                                     <div class="card-body">
-                                        <h6 class="card-title">${day.date}</h6>
+                                        <h6 class="card-title">${convertToBanglaNumbers(day.date)}</h6>
                                         <img src="https://openweathermap.org/img/wn/${day.icon}@2x.png" class="card-img-top" alt="Weather Icon">
                                         <p class="card-text">${day.description}</p>
-                                        <p><strong>Temp:</strong> ${day.temperature}°C</p>
+                                        <p><strong>তাপমাত্রা:</strong> ${convertToBanglaNumbers(day.temperature)}°C</p>
                                     </div>
                                 </div>
                             </div>
                         `;
-                        $("#forecastDetails").append(forecastDay);
-                    });
+            $("#forecastDetails").append(forecastDay);
+          });
 
-                    // Show forecast card
-                    $("#forecastCard").show();
-                },
-                error: function () {
-                    console.log("Failed to load weather data. Please try again.");
-                }
-            });
+          // Show forecast card
+          $("#forecastCard").show();
+        },
+        error: function() {
+          console.log("Failed to load weather data. Please try again.");
         }
-    });
+      });
+    }
+  });
 </script>
 {% endblock %}

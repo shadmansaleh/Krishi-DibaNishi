@@ -1,228 +1,234 @@
 {% extends "layouts/base_auth_admin.html" %}
 
 {% block title %}
-Price Management - Krishi Dibanishi
+মূল্য ব্যবস্থাপনা - কৃষি দিবার্নিশি
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Manage Prices</h2>
+  <h2>মূল্য পরিচালনা</h2>
 
-    <button id="addPriceBtn" class="btn btn-primary mb-3">Add New Price</button>
+  <button id="addPriceBtn" class="btn btn-primary mb-3">নতুন মূল্য যোগ করুন</button>
 
-    <!-- Search Bar -->
-    <input type="text" id="searchBar" class="form-control my-3" placeholder="Search by crop or region...">
+  <!-- Search Bar -->
+  <input type="text" id="searchBar" class="form-control my-3" placeholder="ফসল বা অঞ্চলের মাধ্যমে অনুসন্ধান করুন...">
 
-    <!-- Table to List Prices -->
-    <table id="pricesTable" class="table table-striped">
-        <thead>
-            <tr>
-                <th class="sortable" data-sort="crop">Crop <span class="sort-symbol">⇅</span></th>
-                <th class="sortable" data-sort="region">Region <span class="sort-symbol">⇅</span></th>
-                <th class="sortable" data-sort="price_per_kg">Price per kg <span class="sort-symbol">⇅</span></th>
-                <th class="sortable" data-sort="price_per_kg_retail">Retail Price per kg <span class="sort-symbol">⇅</span></th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Prices will be loaded dynamically here -->
-        </tbody>
-    </table>
+  <!-- Table to List Prices -->
+  <table id="pricesTable" class="table table-striped">
+    <thead>
+      <tr>
+        <th class="sortable" data-sort="crop">ফসল <span class="sort-symbol">⇅</span></th>
+        <th class="sortable" data-sort="region">অঞ্চল <span class="sort-symbol">⇅</span></th>
+        <th class="sortable" data-sort="price_per_kg">মূল্য (প্রতি কেজি)<span class="sort-symbol">⇅</span></th>
+        <th class="sortable" data-sort="price_per_kg_retail">খুচরা প্মূল্য (রতি কেজি)<span class="sort-symbol">⇅</span></th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Prices will be loaded dynamically here -->
+    </tbody>
+  </table>
 
-    <!-- Modal for Add/Edit Price -->
-    <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="priceModalLabel">Add/Edit Price</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="priceForm">
-                        <div class="mb-3">
-                            <label for="crop" class="form-label">Crop</label>
-                            <input type="text" class="form-control" id="crop" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="region" class="form-label">Region</label>
-                            <input type="text" class="form-control" id="region" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price_per_kg" class="form-label">Price per kg</label>
-                            <input type="number" class="form-control" id="price_per_kg" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="price_per_kg_retail" class="form-label">Retail Price per kg</label>
-                            <input type="number" class="form-control" id="price_per_kg_retail" required>
-                        </div>
-                        <input type="hidden" id="price_id">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </form>
-                </div>
-            </div>
+  <!-- Modal for Add/Edit Price -->
+  <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="priceModalLabel">মূল্য যোগ/সম্পাদনা করুন</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <form id="priceForm">
+            <div class="mb-3">
+              <label for="crop" class="form-label">ফসল</label>
+              <input type="text" class="form-control" id="crop" required>
+            </div>
+            <div class="mb-3">
+              <label for="region" class="form-label">অঞ্চল</label>
+              <input type="text" class="form-control" id="region" required>
+            </div>
+            <div class="mb-3">
+              <label for="price_per_kg" class="form-label">প্রতি কেজি মূল্য</label>
+              <input type="number" class="form-control" id="price_per_kg" required>
+            </div>
+            <div class="mb-3">
+              <label for="price_per_kg_retail" class="form-label">খুচরা প্রতি কেজি মূল্য</label>
+              <input type="number" class="form-control" id="price_per_kg_retail" required>
+            </div>
+            <input type="hidden" id="price_id">
+            <button type="submit" class="btn btn-primary">সংরক্ষণ করুন</button>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
 
+
 {% block scripts %}
 <script>
-    $(document).ready(function() {
-        // Fetch prices on page load
-        fetchPrices();
+  $(document).ready(function() {
+    // Fetch prices on page load
+    fetchPrices();
 
+    // Add Price
+    $('#addPriceBtn').click(function() {
+      $('#priceModalLabel').text('Add New Price');
+      $('#priceForm')[0].reset();
+      $('#price_id').val('');
+      $('#priceModal').removeClass('fade');
+      $('#priceModal').modal('show');
+    });
+
+    // Edit Price
+    $(document).on('click', '.edit-btn', function() {
+      const id = $(this).data('id');
+      $.get(`/api/market-prices/${id}`, function(data) {
+        $('#priceModalLabel').text('Edit Price');
+        $('#crop').val(data.crop);
+        $('#region').val(data.region);
+        $('#price_per_kg').val(data.price_per_kg);
+        $('#price_per_kg_retail').val(data.price_per_kg_retail);
+        $('#price_id').val(data.id);
+        $('#priceModal').removeClass('fade');
+        $('#priceModal').modal('show');
+      });
+    });
+
+    // Delete Price
+    $(document).on('click', '.delete-btn', function() {
+      const id = $(this).data('id');
+      if (confirm("আপনি কি এই ফসলটি মুছে ফেলতে চান?")) {
+        $.ajax({
+          url: `/api/market-prices/${id}`,
+          type: 'DELETE',
+          success: function(result) {
+            fetchPrices();
+          }
+        });
+      }
+    });
+
+    // Save Price (Add/Edit)
+    $('#priceForm').submit(function(e) {
+      e.preventDefault();
+      const id = $('#price_id').val();
+      const priceData = {
+        crop: $('#crop').val(),
+        region: $('#region').val(),
+        price_per_kg: $('#price_per_kg').val(),
+        price_per_kg_retail: $('#price_per_kg_retail').val(),
+      };
+
+      if (id) {
+        // Update Price
+        $.ajax({
+          url: `/api/market-prices/${id}`,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(priceData),
+          success: function(result) {
+            fetchPrices();
+            $('#priceModal').modal('hide');
+          }
+        });
+      } else {
         // Add Price
-        $('#addPriceBtn').click(function() {
-            $('#priceModalLabel').text('Add New Price');
-            $('#priceForm')[0].reset();
-            $('#price_id').val('');
-            $('#priceModal').removeClass('fade');
-            $('#priceModal').modal('show');
+        $.post({
+          url: '/api/market-prices',
+          contentType: 'application/json',
+          data: JSON.stringify(priceData),
+          success: function(result) {
+            fetchPrices(); // Refresh the prices
+            $('#priceModal').addClass('fade');
+            $('#priceModal').modal('hide'); // Close the modal
+          },
+          error: function(xhr, status, error) {
+            console.log('Error:', error);
+          }
         });
+      }
+    });
 
-        // Edit Price
-        $(document).on('click', '.edit-btn', function() {
-            const id = $(this).data('id');
-            $.get(`/api/market-prices/${id}`, function(data) {
-                $('#priceModalLabel').text('Edit Price');
-                $('#crop').val(data.crop);
-                $('#region').val(data.region);
-                $('#price_per_kg').val(data.price_per_kg);
-                $('#price_per_kg_retail').val(data.price_per_kg_retail);
-                $('#price_id').val(data.id);
-                $('#priceModal').removeClass('fade');
-                $('#priceModal').modal('show');
-            });
-        });
-
-        // Delete Price
-        $(document).on('click', '.delete-btn', function() {
-            const id = $(this).data('id');
-            if (confirm('Are you sure you want to delete this price?')) {
-                $.ajax({
-                    url: `/api/market-prices/${id}`,
-                    type: 'DELETE',
-                    success: function(result) {
-                        fetchPrices();
-                    }
-                });
-            }
-        });
-
-        // Save Price (Add/Edit)
-        $('#priceForm').submit(function(e) {
-            e.preventDefault();
-            const id = $('#price_id').val();
-            const priceData = {
-                crop: $('#crop').val(),
-                region: $('#region').val(),
-                price_per_kg: $('#price_per_kg').val(),
-                price_per_kg_retail: $('#price_per_kg_retail').val(),
-            };
-
-            if (id) {
-                // Update Price
-                $.ajax({
-                    url: `/api/market-prices/${id}`,
-                    type: 'PUT',
-                    contentType: 'application/json',
-                    data: JSON.stringify(priceData),
-                    success: function(result) {
-                        fetchPrices();
-                        $('#priceModal').modal('hide');
-                    }
-                });
-            } else {
-                // Add Price
-                $.post({
-                    url: '/api/market-prices',
-                    contentType: 'application/json',
-                    data: JSON.stringify(priceData),
-                    success: function(result) {
-                        fetchPrices();  // Refresh the prices
-                        $('#priceModal').addClass('fade');
-                        $('#priceModal').modal('hide');  // Close the modal
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('Error:', error);
-                    }
-                });
-            }
-        });
-
-        // Fetch Prices from API
-        function fetchPrices() {
-            $.get('/api/market-prices', function(data) {
-                const pricesTable = $('#pricesTable tbody');
-                pricesTable.empty();
-                data.forEach(price => {
-                    pricesTable.append(`
+    // Fetch Prices from API
+    function fetchPrices() {
+      $.get('/api/market-prices', function(data) {
+        const pricesTable = $('#pricesTable tbody');
+        pricesTable.empty();
+        data.forEach(price => {
+          pricesTable.append(`
                         <tr>
                             <td>${price.crop}</td>
                             <td>${price.region}</td>
-                            <td>${price.price_per_kg}</td>
-                            <td>${price.price_per_kg_retail}</td>
+                            <td>${convertToBanglaNumbers(price.price_per_kg)}</td>
+                            <td>${convertToBanglaNumbers(price.price_per_kg_retail)}</td>
                             <td>
                                 <button class="btn btn-warning edit-btn" data-id="${price.id}">Edit</button>
                                 <button class="btn btn-danger delete-btn" data-id="${price.id}">Delete</button>
                             </td>
                         </tr>
                     `);
-                });
-
-                const query = ("#searchBar").val().toLowerCase();
-                $("#pricesTable tbody tr").each(function() {
-                    const crop = $(this).find("td:first").text().toLowerCase();
-                    const region = $(this).find("td:nth-child(2)").text().toLowerCase();
-                    $(this).toggle(crop.includes(query) || region.includes(query));
-                });
-            });
-        }
-
-        // Search Functionality
-        $("#searchBar").on("keyup", function() {
-            const query = $(this).val().toLowerCase();
-            $("#pricesTable tbody tr").each(function() {
-                const crop = $(this).find("td:first").text().toLowerCase();
-                const region = $(this).find("td:nth-child(2)").text().toLowerCase();
-                $(this).toggle(crop.includes(query) || region.includes(query));
-            });
         });
 
-        // Sorting Functionality
-        $(".sortable").on("click", function() {
-            const column = $(this).data('sort');
-            const rows = $("#pricesTable tbody tr").get();
-            const ascending = $(this).hasClass('asc');
-            // Toggle sorting direction
-            $(this).toggleClass('asc', !ascending).toggleClass('desc', ascending);
-
-            // Change sort symbol
-            $(".sortable .sort-symbol").text("⇅");  // Reset all to ⇅
-            const sortSymbol = ascending ? "↑" : "↓";
-            $(this).find(".sort-symbol").text(sortSymbol);  // Set the correct symbol
-
-            rows.sort(function(a, b) {
-                const aText = $(a).find(`td:nth-child(${getColumnIndex(column)})`).text();
-                const bText = $(b).find(`td:nth-child(${getColumnIndex(column)})`).text();
-                return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
-            });
-
-            $.each(rows, function(index, row) {
-                $("#pricesTable tbody").append(row);
-            });
+        const query = ("#searchBar").val().toLowerCase();
+        $("#pricesTable tbody tr").each(function() {
+          const crop = $(this).find("td:first").text().toLowerCase();
+          const region = $(this).find("td:nth-child(2)").text().toLowerCase();
+          $(this).toggle(crop.includes(query) || region.includes(query));
         });
+      });
+    }
 
-        // Helper function to get column index based on the column name
-        function getColumnIndex(column) {
-            switch (column) {
-                case 'crop': return 1;
-                case 'region': return 2;
-                case 'price_per_kg': return 3;
-                case 'price_per_kg_retail': return 4;
-                default: return 1;
-            }
-        }
+    // Search Functionality
+    $("#searchBar").on("keyup", function() {
+      const query = $(this).val().toLowerCase();
+      $("#pricesTable tbody tr").each(function() {
+        const crop = $(this).find("td:first").text().toLowerCase();
+        const region = $(this).find("td:nth-child(2)").text().toLowerCase();
+        $(this).toggle(crop.includes(query) || region.includes(query));
+      });
     });
+
+    // Sorting Functionality
+    $(".sortable").on("click", function() {
+      const column = $(this).data('sort');
+      const rows = $("#pricesTable tbody tr").get();
+      const ascending = $(this).hasClass('asc');
+      // Toggle sorting direction
+      $(this).toggleClass('asc', !ascending).toggleClass('desc', ascending);
+
+      // Change sort symbol
+      $(".sortable .sort-symbol").text("⇅"); // Reset all to ⇅
+      const sortSymbol = ascending ? "↑" : "↓";
+      $(this).find(".sort-symbol").text(sortSymbol); // Set the correct symbol
+
+      rows.sort(function(a, b) {
+        const aText = $(a).find(`td:nth-child(${getColumnIndex(column)})`).text();
+        const bText = $(b).find(`td:nth-child(${getColumnIndex(column)})`).text();
+        return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+      });
+
+      $.each(rows, function(index, row) {
+        $("#pricesTable tbody").append(row);
+      });
+    });
+
+    // Helper function to get column index based on the column name
+    function getColumnIndex(column) {
+      switch (column) {
+        case 'crop':
+          return 1;
+        case 'region':
+          return 2;
+        case 'price_per_kg':
+          return 3;
+        case 'price_per_kg_retail':
+          return 4;
+        default:
+          return 1;
+      }
+    }
+  });
 </script>
 {% endblock %}

@@ -64,3 +64,14 @@ footer {
 .navbar {
   margin-bottom: 50px;
 }
+
+
+/* Change cursor to pointer on sortable columns */
+th.sortable {
+    cursor: pointer;
+}
+
+th.sortable .sort-symbol {
+    display: inline-block;
+    margin-left: 5px;
+}

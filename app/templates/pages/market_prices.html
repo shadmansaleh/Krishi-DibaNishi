@@ -59,8 +59,10 @@ Market Prices - Krishi Dibanishi
         $("#searchBar").on("keyup", function() {
             const query = $(this).val().toLowerCase();
             $("#marketPricesTable tbody tr").each(function() {
-                const crop = $(this).find("td:first").text().toLowerCase();
-                $(this).toggle(crop.includes(query));
+                const crop = $(this).find("td:first").text().toLowerCase(); // Crop field
+                const region = $(this).find("td:nth-child(2)").text().toLowerCase(); // Region field
+                // Show row if either crop or region matches the search query
+                $(this).toggle(crop.includes(query) || region.includes(query));
             });
         });
 

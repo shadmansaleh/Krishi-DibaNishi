@@ -10,14 +10,17 @@ Price Management - Krishi Dibanishi
 
     <button id="addPriceBtn" class="btn btn-primary mb-3">Add New Price</button>
 
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" class="form-control my-3" placeholder="Search by crop or region...">
+
     <!-- Table to List Prices -->
     <table id="pricesTable" class="table table-striped">
         <thead>
             <tr>
-                <th>Crop</th>
-                <th>Region</th>
-                <th>Price per kg</th>
-                <th>Retail Price per kg</th>
+                <th class="sortable" data-sort="crop">Crop <span class="sort-symbol">⇅</span></th>
+                <th class="sortable" data-sort="region">Region <span class="sort-symbol">⇅</span></th>
+                <th class="sortable" data-sort="price_per_kg">Price per kg <span class="sort-symbol">⇅</span></th>
+                <th class="sortable" data-sort="price_per_kg_retail">Retail Price per kg <span class="sort-symbol">⇅</span></th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -60,7 +63,6 @@ Price Management - Krishi Dibanishi
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
@@ -167,7 +169,59 @@ Price Management - Krishi Dibanishi
                         </tr>
                     `);
                 });
+
+                const query = ("#searchBar").val().toLowerCase();
+                $("#pricesTable tbody tr").each(function() {
+                    const crop = $(this).find("td:first").text().toLowerCase();
+                    const region = $(this).find("td:nth-child(2)").text().toLowerCase();
+                    $(this).toggle(crop.includes(query) || region.includes(query));
+                });
             });
+        }
+
+        // Search Functionality
+        $("#searchBar").on("keyup", function() {
+            const query = $(this).val().toLowerCase();
+            $("#pricesTable tbody tr").each(function() {
+                const crop = $(this).find("td:first").text().toLowerCase();
+                const region = $(this).find("td:nth-child(2)").text().toLowerCase();
+                $(this).toggle(crop.includes(query) || region.includes(query));
+            });
+        });
+
+        // Sorting Functionality
+        $(".sortable").on("click", function() {
+            const column = $(this).data('sort');
+            const rows = $("#pricesTable tbody tr").get();
+            const ascending = $(this).hasClass('asc');
+            // Toggle sorting direction
+            $(this).toggleClass('asc', !ascending).toggleClass('desc', ascending);
+
+            // Change sort symbol
+            $(".sortable .sort-symbol").text("⇅");  // Reset all to ⇅
+            const sortSymbol = ascending ? "↑" : "↓";
+            $(this).find(".sort-symbol").text(sortSymbol);  // Set the correct symbol
+
+            rows.sort(function(a, b) {
+                const aText = $(a).find(`td:nth-child(${getColumnIndex(column)})`).text();
+                const bText = $(b).find(`td:nth-child(${getColumnIndex(column)})`).text();
+                return ascending ? aText.localeCompare(bText) : bText.localeCompare(aText);
+            });
+
+            $.each(rows, function(index, row) {
+                $("#pricesTable tbody").append(row);
+            });
+        });
+
+        // Helper function to get column index based on the column name
+        function getColumnIndex(column) {
+            switch (column) {
+                case 'crop': return 1;
+                case 'region': return 2;
+                case 'price_per_kg': return 3;
+                case 'price_per_kg_retail': return 4;
+                default: return 1;
+            }
         }
     });
 </script>

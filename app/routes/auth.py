@@ -70,7 +70,7 @@ def register():
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
 
         # Create a new user instance and add it to the database
-        new_user = User(username=username, email=email, password=hashed_password)
+        new_user = User(username=username, email=email, password=hashed_password, usertype=UserType.user)
         db.session.add(new_user)
         db.session.commit()
 

@@ -9,13 +9,17 @@ body {
   padding: 0;
 }
 
+
+main {
+  min-height: 100dvh;
+}
 // Footer
 footer {
   background-color: $primary-color;
   color: white;
   text-align: center;
   padding: 10px 0;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   font-size: 14px;

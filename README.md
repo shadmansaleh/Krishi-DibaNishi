@@ -31,7 +31,7 @@ cd krishi-dibanishi
 2. Create a virtual environment:
 
 ```bash
-python3 -m venv .venv
+python -m venv .venv
 ```
 
 3. Activate virtual environtment:
@@ -49,7 +49,7 @@ source .venv\Scripts\activate
 4. Install dependencies:
 
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 5. Setup environment:
@@ -84,12 +84,19 @@ python run.py
           /api.py        # Api endpoints
           /views.py      # Webpage router from pages/
           /auth.py       # Authentication handler
-        /models.py       # Database models
         /static/         # Static assets (CSS, JS, images)
+          /css           # css files (mostly generated from scss)
+          /scss          # scss stylesheets
+          /js            # imported js for frontend
+          /images        # image directory
+          /favicon.ico   # favicon
         /templates/      # HTML templates
           /layouts/      # Layout-related templates
           /pages/        # Templates for individual pages
           /partials/     # Reusable partial components
+        /models.py       # Database models
+        /utils.py        # utility functions
+        /extensions.py   # extra
     /requirements.txt    # Python dependencies
     /.venv               # Virtual environment (not included in repository)
     /.env                # Environtment file for holding secretes

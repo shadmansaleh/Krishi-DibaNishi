@@ -1,0 +1,87 @@
+// Variables
+@import "utils/colors";
+$font-family: Arial, sans-serif;
+
+// Global Styles
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+}
+
+// Footer
+footer {
+  background-color: $primary-color;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+}
+
+// Login Styles
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 50px;
+  background-color: $light-color;
+  border-radius: 8px;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+// Landing Page Styles
+.hero-section {
+  background-image: url('/static/images/crop_field_background.webp'); // Placeholder image
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  color: $light-color;
+  padding: 100px 0;
+
+  h1 {
+    font-size: 3rem;
+  }
+}
+
+.feature-box {
+  padding: 40px;
+  text-align: center;
+
+  i {
+    font-size: 3rem;
+    color: $secondary-color;
+  }
+}
+
+// Footer Section (alternative)
+.footer {
+  background-color: $light-color;
+  padding: 0px 0;
+  text-align: center;
+}
+
+// Navbar Styles
+.navbar {
+  margin-bottom: 50px;
+}
+
+// Sortable Columns
+th.sortable {
+  cursor: pointer;
+
+  .sort-symbol {
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+

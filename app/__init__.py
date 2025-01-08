@@ -4,15 +4,18 @@ from flask_migrate import Migrate
 from app.routes.views import pages, register_pages
 from app.routes.api import api
 from app.extensions import db
-from app.utils import maybe_compile_scss
+from app.utils import compile_scss_directory,scss_watchdog
 
 migrate = Migrate()
 
 def create_app():
-    maybe_compile_scss("bootstrap_custom.scss")
+    compile_scss_directory()
 
     app = Flask(__name__)
     app.config.from_object('config.Config')
+
+    # watch for scss file changes and complie them on change
+    if app.config['DEBUG']: scss_watchdog()
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -31,6 +34,4 @@ def create_app():
     def page_not_found(e):
         return render_template("errors/404.html"), 404
 
-
     return app
-

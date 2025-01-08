@@ -1,29 +1,19 @@
-// Override Bootstrap variables
+@import "utils/colors";
 
-// Light Mode Color Scheme (Default)
-$body-bg: #E8F5E9;        // Light Green background
-$body-color: #3E2723;     // Dark Brown for text
-$primary: #4CAF50;        // Fresh Green primary color
-$secondary: #2C6B2F;      // Dark Green secondary color
-$success: #A4D600;        // Lime Green success color
-$info: #66BB6A;           // Light Green info color
-$warning: #FFEB3B;        // Light Yellow for warning color
-$danger: #DC3545;         // Red for danger color
-$light: #F1F8E9;          // Light background color for elements
-$dark: #2C6B2F;           // Dark Green for dark elements
+/* // Override Bootstrap variables */
+$body-bg: $light-color;
+$body-color: #3E2723;
+$primary: $primary-color;
+$secondary: $secondary-color;
+$success: $success-color;
+$info: $info-color;
+$warning: $warning-color;
+$danger: $danger-color;
+$light: $light-color;
+$dark: $dark-color;
 
 // Dark Mode Color Scheme (When user prefers dark mode)
 @media (prefers-color-scheme: dark) {
-    /* $body-bg: #3E2723;        // Dark Brown background for dark mode */
-    /* $body-color: #F1F8E9;     // Light color for text in dark mode */
-    /* $primary: #8BC34A;        // Bright Green primary color for dark mode */
-    /* $secondary: #2C6B2F;      // Dark Green secondary color for dark mode */
-    /* $success: #A4D600;        // Lime Green success color */
-    /* $info: #66BB6A;           // Light Green info color */
-    /* $warning: #FFEB3B;        // Light Yellow for warning color */
-    /* $danger: #DC3545;         // Red for danger color */
-    /* $light: #F1F8E9;          // Light background color for dark mode elements */
-    /* $dark: #2C6B2F;           // Dark Green for dark mode dark elements */
 }
 // Import Bootstrap's Sass files
 @import "bootstrap/scss/bootstrap";

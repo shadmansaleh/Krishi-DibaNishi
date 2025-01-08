@@ -1,26 +1,31 @@
 {% extends "layouts/base_auth.html" %}
 
 {% block title %}
-Settings - Krishi Dibanishi
+সেটিংস - কৃষি দিবানিশি
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Settings</h2>
-    <form method="POST" action="{{ url_for('auth.update_settings') }}">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ session.get('email', '') }}">
-        </div>
-        <div class="form-group">
-            <label for="password">New Password (Leave empty to keep current)</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-    </form>
+  <h2>সেটিংস</h2>
+  <form method="POST" action="{{ url_for('auth.update_settings') }}">
+    <div class="form-group">
+      <label for="username">ব্যবহারকারীর নাম</label>
+      <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required>
+    </div>
+    <div class="form-group">
+      <label for="email">ইমেইল</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ session.get('email', '') }}">
+    </div>
+    <div class="form-group">
+      <label for="password">নতুন পাসওয়ার্ড (বর্তমান পাসওয়ার্ড রাখতে খালি রাখুন)</label>
+      <input type="password" class="form-control" id="password" name="password">
+    </div>
+    <div class="form-group">
+      <label for="confirm_password">নতুন পাসওয়ার্ড নিশ্চিত করুন</label>
+      <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+    </div>
+    <button type="submit" class="btn btn-primary">সংরক্ষণ করুন</button>
+  </form>
 </div>
+
 {% endblock %}

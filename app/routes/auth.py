@@ -86,6 +86,7 @@ def update_settings():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        confirm_password = request.form['confirm_password']
 
         user = User.query.filter_by(username=session['username']).first()
 
@@ -94,7 +95,7 @@ def update_settings():
             user.username = username
         if email != user.email:
             user.email = email
-        if password:
+        if password and password == confirm_password:
             user.password = generate_password_hash(password, method='pbkdf2:sha256')
 
         db.session.commit()

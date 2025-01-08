@@ -1,22 +1,26 @@
 {% extends "layouts/base_auth.html" %}
 
 {% block title %}
-Profile - Krishi Dibanishi
+প্রোফাইল - কৃষি দিবানিশি
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Profile</h2>
-    <div class="card">
-        <div class="card-header">
-            User Profile
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">{{ session['username'] }}</h5>
-            <p class="card-text">Email: {{ session.get('email', 'Not available') }}</p>
-            <!-- Add other profile information as needed -->
-            <a href="{{ url_for('settings') }}" class="btn btn-primary">Edit Settings</a>
-        </div>
+  <h2>প্রোফাইল</h2>
+  <div class="card">
+    <div class="card-header">
+      ব্যবহারকারীর প্রোফাইল
     </div>
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ session['username'] }}
+      </h5>
+      <p class="card-text">ইমেইল:
+        {{ session.get('email', 'উপলব্ধ নেই') }}
+      </p>
+      <!-- Add other profile information as needed -->
+      <a href="{{ url_for('settings') }}" class="btn btn-primary">সেটিংস সম্পাদনা করুন</a>
+    </div>
+  </div>
 </div>
 {% endblock %}

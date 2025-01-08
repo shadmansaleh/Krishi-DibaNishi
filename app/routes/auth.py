@@ -83,7 +83,7 @@ def register():
 @auth.route('/update_settings', methods=['GET', 'POST'])
 def update_settings():
     if request.method == 'POST':
-        username = request.form['username']
+        # username = request.form['username']
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
@@ -91,15 +91,15 @@ def update_settings():
         user = User.query.filter_by(username=session['username']).first()
 
         # Update the user details
-        if username != user.username:
-            user.username = username
+        # if username != user.username:
+        #     user.username = username
         if email != user.email:
             user.email = email
         if password and password == confirm_password:
             user.password = generate_password_hash(password, method='pbkdf2:sha256')
 
         db.session.commit()
-        session['username'] = username  # Update session with new username
+        # session['username'] = username  # Update session with new username
 
         flash('Settings updated successfully!', 'success')
         return redirect(url_for('profile'))

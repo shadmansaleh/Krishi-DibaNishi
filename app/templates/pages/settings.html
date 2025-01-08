@@ -10,7 +10,7 @@
   <form method="POST" action="{{ url_for('auth.update_settings') }}">
     <div class="form-group">
       <label for="username">ব্যবহারকারীর নাম</label>
-      <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required>
+      <input type="text" class="form-control" id="username" name="username" value="{{ session['username'] }}" required readonly>
     </div>
     <div class="form-group">
       <label for="email">ইমেইল</label>

@@ -6,36 +6,36 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto px-2">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/">হোম</a>
             </li>
             {% if session.get('logged_in') and not session.get('is_admin')%}
                 <li class="nav-item">
-                    <a class="nav-link" href="/crop_suggestion">Crop Suggestion</a>
+                    <a class="nav-link" href="/crop_suggestion">স্মার্ট-ফসল</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/weather_prediction">Weather Prediction</a>
+                    <a class="nav-link" href="/weather_prediction">আবহাওয়া</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/market_prices">Market Prices</a>
+                    <a class="nav-link" href="/market_prices">বাজার দর</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/soil_health">Soil Health</a>
+                    <a class="nav-link" href="/soil_health">মাটির যত্ন</a>
                 </li>
             {% endif %}
             {% if session.get('logged_in') and session.get('is_admin')%}
               <li class="nav-item">
-                  <a class="nav-link" href="/admin/price_management">Price Management</a>
+                  <a class="nav-link" href="/admin/price_management">বাজার দর</a>
               </li>
             {% endif %}
             {% if not session.get('is_admin')%}
             <li class="nav-item">
-                <a class="nav-link" href="/about_us">About us</a>
+                <a class="nav-link" href="/about_us">আমাদের সম্পর্কে</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/faq">FAQ</a>
+                <a class="nav-link" href="/faq">জিজ্ঞাসা</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/contact_us">Contact</a>
+                <a class="nav-link" href="/contact_us">যোগাযোগ</a>
             </li>
             {% endif %}
             {% if session.get('logged_in') %}

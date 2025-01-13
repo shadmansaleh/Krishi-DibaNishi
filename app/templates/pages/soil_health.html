@@ -5,7 +5,114 @@ Soil Health - Krishi Dibanishi
 {% endblock %}
 
 
+{% block head %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
 {% block content %}
-<h2>Soil Health</h2>
-<p>Find tips for Soil health</p>
+<section class="hero1">
+    <div class="container">
+      <h1>মাটির যত্ন</h1>
+      <p>স্বাস্থ্যকর ও উর্বর মাটি বজায় রাখার জন্য আপনার নির্দেশিকা</p>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <button id="tips-tab" class="tab active">টিপস</button>
+    <button id="articles-tab" class="tab">লেখা</button>
+    <button id="faq-tab" class="tab">প্রশ্ন-উত্তর</button>
+  </div>
+
+  <main>
+    <section id="tips-section" class="tab-content">
+        <div class="card" style="background: white;
+        color: #1a2e1a;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width:1200px;height:200px">
+          <h2>মাটি পরীক্ষা</h2>
+          <p>নিয়মিত মাটি পরীক্ষা আপনাকে মাটির পুষ্টি এবং পিএইচ স্তর বুঝতে সাহায্য করে।</p>
+        </div>
+        <div class="card" style="background: white;
+        color: #1a2e1a;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width:1200px;height:200px">
+          <h2>জৈব পদার্থ</h2>
+          <p>কম্পোস্ট এবং ফসলের অবশিষ্টাংশ যোগ করার মাধ্যমে মাটিতে জৈব পদার্থ বজায় রাখুন।</p>
+        </div>
+      
+        <!-- সমস্যা বিবরণের ফর্ম -->
+        <div class="problem-form">
+          <h2>আপনার মাটির সমস্যা বর্ণনা করুন</h2>
+          <form id="problem-form">
+            <label for="problem-description">আপনার সমস্যা কী?</label>
+            <textarea id="problem-description" placeholder="আপনার মাটির সমস্যা বর্ণনা করুন (যেমন, উর্বরতার অভাব, অম্লীয় মাটি)" required></textarea>
+            <button type="submit">পরামর্শ নিন</button>
+          </form>
+          <div id="problem-response" class="hidden">
+            <h3>পরামর্শ</h3>
+            <p id="response-message"></p>
+          </div>
+        </div>
+      </section>
+
+    <section id="articles-section" class="tab-content hidden">
+        <form id="article-form" style="margin: 20px;" class="article-form">
+            <h2>একটি লেখা লিখুন</h2>
+            <label for="title">শিরোনাম</label>
+            <input type="text" id="title" placeholder="আপনার লেখার শিরোনাম লিখুন" required>
+            <label for="content">বিষয়বস্তু</label>
+            <textarea id="content" placeholder="আপনার লেখার বিষয়বস্তু লিখুন" required></textarea>
+            <label for="author">লেখক</label>
+            <input type="text" id="author" placeholder="আপনার নাম লিখুন" required>
+            <button class="bt" type="submit">প্রকাশ করুন</button>
+          </form>
+      <div id="articles-list">
+        <h2 style="margin-left: 20px;">সাম্প্রতিক লেখা</h2>
+        <div id="latest-articles">
+          <div class="card" style="background: white;
+          color: #1a2e1a;
+          padding: 20px;
+          margin: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width:1200px;height:200px">
+            <h2>জৈব পদার্থ</h2>
+            <p>কম্পোস্ট এবং ফসলের অবশিষ্টাংশ যোগ করার মাধ্যমে মাটিতে জৈব পদার্থ বজায় রাখুন।</p>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <section id="faq-section" class="tab-content hidden">
+        <div class="faq">
+          <button class="faq-question">আমি কত সময় অন্তর মাটি পরীক্ষা করব?</button>
+          <div class="faq-answer hidden"onclick="toggleans()">প্রতি ২-৩ বছরে মাটি পরীক্ষা করা উচিত।</div>
+        </div>
+        <div class="faq">
+          <button class="faq-question">আদর্শ মাটির পিএইচ কী?</button>
+          <div class="faq-answer hidden" onclick="toggleans()">অধিকাংশ ফসল ৬.০ থেকে ৭.০ পিএইচ স্তরে ভালভাবে বৃদ্ধি পায়।</div>
+        </div>
+      </section>
+      
+  </main>
+
+  <script src="/static/js/scripts.js"></script>
+  <script>
+    function toggleans() {
+        const faq = document.getElementById("faq-answer");
+        faq.classList.toggle("hidden"); // This toggles the 'hidden' class to show or hide the drawer
+}
+
+</script>
+  <script>
+    function toggleDrawer() {
+        const navLinks = document.getElementById("nav-links");
+        navLinks.classList.toggle("hidden"); // This toggles the 'hidden' class to show or hide the drawer
+}
+
+</script>
 {% endblock %}

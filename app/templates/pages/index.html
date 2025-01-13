@@ -1,39 +1,144 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<section class="hero-section text-center">
-  <div class="container">
-    <h1>Welcome to Krishi Dibanishi</h1>
-    <p>Helping farmers with crop suggestions, weather predictions, and market prices</p>
-    <a href="#features" class="btn btn-primary btn-lg">Explore Features</a>
-  </div>
-</section>
+<div class="hero">
+  <div class="banner-text">
+    <h1>আপনার সবুজ ভবিষ্যতের পথে</h1>
+    <p>কৃষি, প্রযুক্তি এবং উদ্ভাবনের সমন্বয়ে একটি নতুন দিগন্ত।</p>
 
-<!-- Features Section -->
-<section id="features" class="container text-center my-5">
-  <h2 class="mb-4">Our Features</h2>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="feature-box">
-        <i class="fas fa-seedling"></i>
-        <h3>Crop Suggestion</h3>
-        <p>Get personalized crop recommendations based on weather, soil, and season.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="feature-box">
-        <i class="fas fa-cloud-sun"></i>
-        <h3>Weather Prediction</h3>
-        <p>Stay updated with accurate weather forecasts to plan your farming activities.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="feature-box">
-        <i class="fas fa-chart-line"></i>
-        <h3>Market Prices</h3>
-        <p>Get real-time market prices for your crops to make informed selling decisions.</p>
-      </div>
+
+    <!-- Separator -->
+    <div class="separator"></div>
+
+    <div class="button-container">
+        <button class="btn btn1">কৃষি কথা </button>
+        <button class="btn btn2">স্মার্ট ফসল নির্বাচন</button>
     </div>
   </div>
-</section>
+
+
+  </div>
+
+
+
+  <div class="feature-head">
+  <h3 class="small-heading">সমাজনির্ভর কৃষি উন্নয়ন</h3>
+  <h1>একসাথে টেকসই ভবিষ্যত গড়ি</h1>
+  <p class="subtitle">
+  স্মার্ট কৃষি পরামর্শ, আবহাওয়ার পূর্বাভাস, মাটির স্বাস্থ্য যত্ন, এবং বাজারের মূল্য আপডেটের মাধ্যমে আমরা কৃষকদের ক্ষমতায়িত করি। 
+  আমাদের কার্যক্রম স্থায়ী উন্নয়ন, প্রযুক্তি-নির্ভর সমাধান এবং প্রকৃত কৃষক চাহিদার উপর ভিত্তি করে তৈরি, যা উন্নয়নের পথ সুগম করে।
+  </p>
+  </div>
+
+
+  <div class="card-container">
+  <!-- Card 1 -->
+  <div class="card">
+  <img src="static\images\pic(2).png" alt="Climate Action">
+  <div class="static-text">
+    <h3>স্মার্ট ফসল পরামর্শ</h3>
+  </div>
+  <div class="hover-text">
+    <i class="fa-solid fa-seedling"></i>
+    <h3>স্মার্ট ফসল পরামর্শ</h3>
+    <div class="separator"></div>
+    <p>
+        আপনার জমি ও মাটির গুণাগুণ অনুযায়ী সেরা ফসল চাষের নির্দেশিকা। নতুন প্রযুক্তি ও ডেটার সাহায্যে আপনি পাবেন সঠিক পরামর্শ।
+    </p>
+    <button>আরও জানুন</button>
+  </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="card">
+  <img src="static\images\organic-farming-min.jpg" alt="Environmental Conservation">
+  <div class="static-text">
+    <h3>পরিবেশ সংরক্ষণ</h3>
+  </div>
+  <div class="hover-text">
+  
+    <i class="fa-solid fa-mountain"></i>
+
+
+    <h3>পরিবেশ সংরক্ষণ</h3>
+    <div class="separator"></div>
+    <p>
+        প্রাকৃতিক পরিবেশের সুরক্ষায় আমাদের লক্ষ্য। আমরা পুনরুদ্ধার প্রকল্প, বায়োডাইভার্সিটি বৃদ্ধি এবং পুনঃবনায়নের মাধ্যমে কাজ করছি।
+    </p>
+    <button>আরও জানুন</button>
+  </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="card">
+  <img src="static\images\pic.png" alt="Sustainable Agribusiness">
+  <div class="static-text">
+    <h3>আবহাওয়ার পূর্বাভাস</h3>
+  </div>
+  <div class="hover-text">
+    <i class="fa-solid fa-temperature-high"></i>
+    <h3>আবহাওয়ার পূর্বাভাস</h3>
+    <div class="separator"></div>
+    <p>
+        কৃষকদের জন্য আধুনিক প্রযুক্তি ব্যবহার করে নির্ভুল এবং নির্ভরযোগ্য আবহাওয়ার পূর্বাভাস প্রদান করে।
+    </p>
+    <button>আরও জানুন</button>
+  </div>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+  <div class="parent-container">
+  <div class="form-container">
+  <div class="image-section"></div>
+  <div class="form-section">
+  <h2>প্রশ্ন আছে বা পার্থক্য গড়তে চান?</h2>
+  <p>আমাদের কার্যক্রম সম্পর্কে জানতে চান, আমাদের মিশনে সহায়তা করতে চান, বা যুক্ত হওয়ার উপায় খুঁজছেন? টেকসই পরিবর্তন তৈরির প্রথম ধাপ হিসেবে আমাদের সাথে সংযুক্ত হন।</p>
+  <form>
+    <div class="form-group">
+      <input type="text" id="name" placeholder="আপনার নাম*" required>
+      <input type="email" id="email" placeholder="আপনার ইমেইল" required>
+    </div>
+    <div class="form-group">
+      <input type="text" id="phone" placeholder="আপনার ফোন নাম্বার*" required>
+    
+      <select id="support" required>
+        <option value="" disabled selected hidden>একটি অপশন সিলেক্ট করুন</option>
+        <option value="general">সাধারণ জিজ্ঞাসা</option>
+        <option value="support">সহায়তা</option>
+        <option value="partnership">যুক্ত হওয়ার উপায়</option>
+    </select>
+      
+    </div>
+    <label for="message">আপনার বার্তা লিখুন</label>
+    <textarea id="message" rows="4" placeholder="আপনার বার্তা"></textarea>
+
+    <div>
+      <input type="checkbox" id="terms" required>
+      <label for="terms">আমাদের শর্তাবলীতে সম্মতি জানান</label>
+    </div>
+
+    <button type="submit">বার্তা পাঠান</button>
+  </form>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+<script>
+function toggleDrawer() {
+  const navLinks = document.getElementById("nav-links");
+  navLinks.classList.toggle("hidden"); // This toggles the 'hidden' class to show or hide the drawer
+}
+
+</script>
 {% endblock %}

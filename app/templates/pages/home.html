@@ -7,6 +7,388 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+  <style>
+    @keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(30px); /* Slide up from 30px below */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Slide to its original position */
+    }
+}
+
+
+
+
+.banner-text h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    line-height: 1.2;
+    animation: fadeInSlide 1.2s ease-out forwards;
+}
+
+.banner-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    line-height: 2.5;
+    animation: fadeInSlide 1.2s ease-out forwards;
+}
+
+/* Remove extra spacing around .hero */
+.hero {
+    height: 100vh;
+    width:100%;
+
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; /* Ensure it sticks to the edges */
+    top: 0;
+    left: 0;
+
+}
+
+/* Adjust .banner-text to fit better */
+.banner-text {
+    position: relative;
+    z-index: 1;
+    color: #a8cd62;
+    max-width: 100%;
+    text-align: left;
+    padding: 20px;
+    animation: fadeInSlide 1s ease-out forwards;
+    margin-top: 50px;
+}
+
+
+@media (max-width: 300px) {
+    .hero {
+        flex-direction: column;
+    }
+
+    .banner-text {
+        max-width: 90%;
+        margin-left: 10px;
+        text-align: center;
+        animation: fadeInSlide 1.2s ease-out forwards;
+    }
+
+    .banner-text h1 {
+        font-size: 1.8rem;
+        animation: fadeInSlide 1.2s ease-out forwards;
+    }
+
+    .banner-text p {
+        font-size: 0.9rem;
+        animation: fadeInSlide 1.2s ease-out forwards;
+    }
+}
+
+
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%; 
+    height: 100%;
+}
+
+
+
+.button-container {
+    gap: 20px; /* Add space between buttons */
+    margin-top: 20px;
+}
+
+.button-container .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    background-color: #f3c079;
+    color: rgb(37, 28, 28);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+.button-container .btn:hover {
+    background-color: #b88d47;
+    transform: scale(1);
+}
+
+.btn1{
+    margin-right: 15px;
+}
+
+
+
+/* Separator styling */
+.separator {
+    width: 30%;
+    height: 5px;
+    border:#83a83e;
+    border-radius: 20px;
+    background-color: #83a83e; /* Color of the separator */
+    margin: 20px 0;
+}
+
+.feature-head {
+    padding-left:80px;
+    padding-right:80px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.small-heading {
+    color: green;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.feature-head h1 {
+    color: rgb(211, 142, 67);
+    font-size: 36px;
+    margin: 10px 0;
+}
+
+.subtitle {
+    color: rgb(123, 123, 123);
+    font-size: 18px;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+
+
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+
+  
+  /* Card Styling */
+  .card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    z-index: 1;
+  }
+
+  .card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+
+/* Static Text (Visible Always) */
+.static-text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .static-text h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  
+  /* Hover Text Styling */
+  .hover-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #004b23;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .hover-text h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .hover-text p {
+    margin: 15px 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .hover-text button {
+    padding: 10px 20px;
+    background-color: #004b23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .hover-text button:hover {
+    background-color: #007c3c;
+  }
+  
+  .card:hover .hover-text {
+    opacity: 1;
+  }
+  
+  .card:hover .static-text {
+    opacity: 0;
+  }
+
+  .hover-text i {
+    font-size: 40px; /* Adjust size */
+    margin-bottom: 10px; /* Space between icon and text */
+    color: rgb(26, 113, 32); /* Icon color */
+}
+
+
+
+
+
+.parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures full height of the viewport */
+}
+
+.form-container {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-section {
+    flex: 1;
+    background: url('images/two-farmers-cultivating-plants-orchard.jpg') no-repeat center center/cover;
+  }
+
+  .form-section {
+    flex: 1;
+    padding: 30px;
+    background-color: #032b0e;
+    color: #fff;
+  }
+
+  .form-section h2 {
+    margin-top: 0;
+    font-size: 24px;
+  }
+
+  .form-section p {
+    margin: 10px 0 20px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .form-section form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .form-section form input,
+  .form-section form textarea,
+  .form-section form select {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+  }
+
+  .form-section form input[type="checkbox"] {
+    margin: 0 10px 0 0;
+    width: auto;
+  }
+
+  .form-section form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .form-section form button:hover {
+    background-color: #218838;
+  }
+
+  .form-section label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .form-group > input,
+  .form-group > select {
+    flex: 1;
+  }
+
+select {
+    color: grey; /* Default color for placeholder */
+}
+
+select option {
+    color: black; /* Color for actual options */
+}
+
+select option[value=""] {
+    color: grey; /* Placeholder-specific color */
+}
+  </style>
 </head>
 <body>
     <div class="hero">

@@ -36,7 +36,7 @@ footer {
   background-size: cover;
   background-position: center;
   color: #F1F8E9;
-  padding: 100px 0; }
+  padding: 0px 0; }
   .hero-section h1 {
     font-size: 3rem; }
 
@@ -53,7 +53,7 @@ footer {
   text-align: center; }
 
 .navbar {
-  margin-bottom: 50px; }
+  margin-bottom: -20px; }
 
 th.sortable {
   cursor: pointer; }

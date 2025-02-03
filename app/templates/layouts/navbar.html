@@ -1,74 +1,220 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand ps-4 fs-4" href="/">Krishi Dibanishi</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto px-2">
-            <li class="nav-item">
-                <a class="nav-link" href="/">হোম</a>
-            </li>
-            {% if session.get('logged_in') and not session.get('is_admin')%}
-                <li class="nav-item">
-                    <a class="nav-link" href="/crop_suggestion">স্মার্ট-ফসল</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/weather_prediction">আবহাওয়া</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/market_prices">বাজার দর</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/soil_health">মাটির যত্ন</a>
-                </li>
+<nav>
+    <div class="nav-left">
+        <img src="/static/images/কৃষি_দিবানিশী-logo.png" alt="Krishi Dibanishi Logo" class="logo">
+        <div class="hamburger" onclick="toggleDrawer()">☰</div>
+        <ul id="nav-links" class="hidden">
+            <li><a href="/">হোম</a></li>
+            {% if session.get('logged_in') and not session.get('is_admin') %}
+                <li><a href="/crop_suggestion">স্মার্ট-ফসল</a></li>
+                <li><a href="/weather_prediction">আবহাওয়া</a></li>
+                <li><a href="/market_prices">বাজার দর</a></li>
+                <li><a href="/soil_health">মাটির যত্ন</a></li>
             {% endif %}
-            {% if session.get('logged_in') and session.get('is_admin')%}
-              <li class="nav-item">
-                  <a class="nav-link" href="/admin/price_management">বাজার দর</a>
-              </li>
+            {% if session.get('logged_in') and session.get('is_admin') %}
+                <li><a href="/admin/price_management">বাজার দর</a></li>
             {% endif %}
-            {% if not session.get('is_admin')%}
-            <li class="nav-item">
-                <a class="nav-link" href="/about_us">আমাদের সম্পর্কে</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/faq">জিজ্ঞাসা</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/contact_us">যোগাযোগ</a>
-            </li>
+            {% if not session.get('is_admin') %}
+                <li><a href="/about_us">আমাদের সম্পর্কে</a></li>
+                <li><a href="/faq">জিজ্ঞাসা</a></li>
+                <li><a href="/contact_us">যোগাযোগ</a></li>
             {% endif %}
             {% if session.get('logged_in') %}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ session.get('username') }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url_for('profile') }}">Profile</a>
-                        <a class="dropdown-item" href="{{ url_for('settings') }}">Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
-                    </div>
+                <li class="dropdown">
+                    <a href="#" onclick="toggleDropdown()">{{ session.get('username') }} ▼</a>
+                    <ul class="dropdown-menu hidden">
+                        <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                        <li><a href="{{ url_for('settings') }}">Settings</a></li>
+                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                    </ul>
                 </li>
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-                </li>
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
             {% endif %}
         </ul>
     </div>
 </nav>
 
-<script defer>
-$(document).ready(function () {
-    var currentUrl = window.location.pathname;
-    $('.navbar-nav .nav-link').each(function () {
-        if ($(this).attr('href') === currentUrl) {
-            $(this).addClass('active');
-        } else {
-            $(this).removeClass('active');
-        }
-    });
-});
-</script>
 
+
+<style>
+   nav {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-top: -25px;
+    padding-top: 50px;
+    background-color: rgb(15, 41, 27);
+    height: 160px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 20px; 
+
+}
+
+#nav-links {
+    display: flex; 
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    margin-top: -70px;
+    color:rgb(0, 0, 0);
+}
+
+
+
+nav ul {
+    display: flex;
+    gap: 20px; 
+    margin: 0; 
+    padding: 0;
+}
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a {
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: greenyellow;
+    transition: 0.4s;
+}
+
+button, .drawer-button {
+    border: none;
+    background: green;
+    padding: 12px 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.4s;
+    
+}
+
+button:hover, .drawer-button:hover {
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.logo {
+    max-height: 250px; 
+    width: auto; 
+    margin-right: -50px;
+    margin-left: -55px;
+    margin-top: -50px;
+}
+
+/* @media (max-width: 768px) {
+    .logo {
+        height: 40px;
+    }
+} */
+
+
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    .hamburger {
+        display: block;
+        margin-top: -70px;
+    }
+
+    nav ul {
+        display: none; 
+        z-index: 2;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        background: rgb(204, 255, 145);
+        padding: 10px 5%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+    }
+
+    nav ul li {
+        width: 100%;
+    }
+
+    nav ul li a, .drawer-button {
+        font-size: 16px;
+        display: block;
+        padding: 10px 0;
+        color: white;
+    }
+
+    nav ul li button.drawer-button {
+        text-align: center;
+        background: green;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .hidden {
+        display: flex !important; 
+    }
+}
+
+@media (max-width: 768px) {
+    #nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        background: rgba(1, 4, 0, 0.892);
+        padding: 10px 5%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        margin-top: 40px;
+    }
+
+    .hidden {
+        display: flex !important; 
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        height: 150px; 
+        margin-left: 0px;
+    }
+} 
+
+</style>
+
+<script>
+    function toggleDrawer() {
+        document.getElementById('nav-links').classList.toggle('hidden');
+    }
+    function toggleDropdown() {
+        document.querySelector('.dropdown-menu').classList.toggle('hidden');
+    }
+</script>

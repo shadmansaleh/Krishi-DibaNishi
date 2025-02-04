@@ -7,18 +7,20 @@ Crop Suggestion - Krishi Dibanishi
 {% block content %}
     <div class="container">
         <div class="icon">&#127793;</div>
-        <h2>Crop Suggestion</h2>
-        <p>Get suggestions for the best crops to grow!</p>
+        <h2>ফসল পরামর্শ</h2>
+        <p>সেরা ফসল চাষের জন্য পরামর্শ পান!</p>
+
         <form id="crop-form">
-            <input type="number" name="nitrogen" placeholder="Nitrogen (N) - mg/kg" required>
-            <input type="number" name="phosphorus" placeholder="Phosphorus (P) - mg/kg" required>
-            <input type="number" name="potassium" placeholder="Potassium (K) - mg/kg" required>
-            <input type="number" name="temperature" placeholder="Temperature (°C)" required>
-            <input type="number" name="humidity" placeholder="Humidity (%)" required>
-            <input type="number" name="ph" placeholder="pH Level" required>
-            <input type="number" name="rainfall" placeholder="Rainfall (mm)" required>
-            <button class="bt" type="submit">Get Recommendation</button>
+            <input type="number" name="nitrogen" placeholder="নাইট্রোজেন (N) - mg/kg" required>
+            <input type="number" name="phosphorus" placeholder="ফসফরাস (P) - mg/kg" required>
+            <input type="number" name="potassium" placeholder="পটাশিয়াম (K) - mg/kg" required>
+            <input type="number" name="temperature" placeholder="তাপমাত্রা (°C)" required>
+            <input type="number" name="humidity" placeholder="আর্দ্রতা (%)" required>
+            <input type="number" name="ph" placeholder="pH মাত্রা" required>
+            <input type="number" name="rainfall" placeholder="বৃষ্টিপাত (মিমি)" required>
+            <button class="bt" type="submit">পরামর্শ নিন</button>
         </form>
+        
         <div id="result"></div>
     </div>
 {% endblock %}

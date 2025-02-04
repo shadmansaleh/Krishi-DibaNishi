@@ -14,7 +14,7 @@
                 <li><a href="/admin/price_management">বাজার দর</a></li>
             {% endif %}
             {% if not session.get('is_admin') %}
-                <li><a href="/about_us">আমাদের সম্পর্কে</a></li>
+                <!-- <li><a href="/about_us">আমাদের সম্পর্কে</a></li> -->
                 <li><a href="/faq">জিজ্ঞাসা</a></li>
                 <li><a href="/contact_us">যোগাযোগ</a></li>
             {% endif %}
@@ -43,8 +43,11 @@
     justify-content: space-between; 
     margin-top: -25px;
     padding-top: 50px;
-    background-color: rgb(15, 41, 27);
+    background-color: #222E1C;
     height: 160px;
+    /* border: #609c42 1px solid;  */
+    border-bottom: 3px solid rgb(221, 186, 80);
+    border-width: 3px;
 }
 
 .nav-left {

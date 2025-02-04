@@ -1,51 +1,205 @@
 {% extends "layouts/base.html" %}
 
 {% block title %}
-FAQ - Krishi Dibanishi
+প্রশ্নোত্তর - কৃষি দিবানিশী
 {% endblock %}
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Frequently Asked Questions</h2>
+    <h2>সচরাচর জিজ্ঞাসিত প্রশ্ন</h2>
     <div class="accordion" id="faqAccordion">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    What is Krishi Dibanishi?
+                <button class="accordion-button faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    কৃষি দিবানিশী কী?
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    Krishi Dibanishi is an online platform designed to help farmers by providing crop suggestions, weather predictions, and market prices to improve farming efficiency.
+                    কৃষি দিবানিশী একটি অনলাইন প্ল্যাটফর্ম যা কৃষকদের জন্য ফসলের পরামর্শ, আবহাওয়ার পূর্বাভাস এবং বাজার দর সরবরাহ করে, যাতে তারা চাষাবাদকে আরও কার্যকর করতে পারেন।
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    How does the crop suggestion work?
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    ফসল পরামর্শ ব্যবস্থা কীভাবে কাজ করে?
                 </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    The crop suggestion feature uses climate and soil data to recommend crops suitable for specific regions and seasons, helping farmers maximize yield.
+                    ফসল পরামর্শ ফিচারটি জলবায়ু ও মাটির তথ্য ব্যবহার করে নির্দিষ্ট অঞ্চলের উপযোগী ফসলের সুপারিশ প্রদান করে, যা কৃষকদের ফলন বৃদ্ধিতে সহায়তা করে।
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    How do I register for an account?
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    আমি কীভাবে একটি অ্যাকাউন্ট তৈরি করব?
                 </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                 <div class="accordion-body">
-                    To register, simply click on the "Register" link in the navigation menu and fill out the registration form.
+                    নিবন্ধন করতে, উপরের মেনুতে "নিবন্ধন" অপশনে ক্লিক করুন এবং নিবন্ধন ফর্মটি পূরণ করুন।
                 </div>
             </div>
         </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    কৃষি দিবানিশী কেন ব্যবহার করবেন?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    কৃষি দিবানিশী কৃষকদের জন্য একটি একক প্ল্যাটফর্ম যা ফসলের পরামর্শ, আবহাওয়ার পূর্বাভাস, বাজার মূল্য এবং অন্যান্য তথ্য সরবরাহ করে, যা তাদের চাষাবাদকে আরও কার্যকর করে।
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    আমি কীভাবে বাজার দাম জানতে পারি?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    বাজার দাম জানার জন্য, আমাদের প্ল্যাটফর্মে প্রতিদিন আপডেট হওয়া বাজারের তথ্য দেখতে পারেন। এটি আপনাকে আপনার ফসল বিক্রি করার সময় সঠিক দামে সাহায্য করবে।
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    কৃষি দিবানিশী কি শুধুমাত্র কৃষকদের জন্য?
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    না, কৃষি দিবানিশী কৃষকদের পাশাপাশি যেকোনো কৃষি খাতের সাথে যুক্ত ব্যক্তির জন্য উপকারী। এটি কৃষি গবেষক, শিক্ষার্থী এবং কৃষি ব্যবসায়ীদের জন্যও তথ্য সরবরাহ করে।
+                </div>
+            </div>
+        </div>
+        
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed faqbtn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    আবহাওয়া পূর্বাভাস কিভাবে ব্যবহৃত হয়?
+                </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    আবহাওয়া পূর্বাভাস কৃষকদের জন্য গুরুত্বপূর্ণ কারণ এটি তাদের চাষাবাদ পরিকল্পনায় সহায়ক। আবহাওয়া সম্পর্কিত তথ্য যেমন বৃষ্টি, তাপমাত্রা, এবং অন্যান্য মৌসুমী পরিবর্তনগুলি তাদের ফসলের উৎপাদন নিশ্চিত করতে সাহায্য করে।
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
+
+
+
+
+
+<style>
+    .faq-title {
+        font-size: 2rem;
+        color: #215924;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .accordion-button {
+        background-color: #ffffff;
+        color: #225524;
+        font-weight: bold;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        transition: 0.3s ease;
+        padding: 15px;
+        text-align: left;
+        font-size: 1.1rem;
+        width: 100%;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+    }
+
+    .accordion-button:hover {
+        background-color: #b8e8ba;
+        color: rgb(25, 47, 23);
+        transform: scale(1);
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: rgb(149, 207, 152);
+        color: rgb(32, 60, 22);
+    }
+
+    .accordion-body {
+        background-color: #ffffff;
+        padding: 20px;
+        font-size: 1rem;
+        border-left: 3px solid #388e3c;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .accordion-item {
+        margin-bottom: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+    }
+
+    .accordion-item:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .accordion-item .accordion-button::after {
+        content: none;
+    }
+    /* .accordion-button {
+    background-color: #ffffff;
+    color: rgb(31, 76, 32);
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.accordion-button:hover {
+    background-color: #b8e8ba;
+    transform: scale(1);
+    color: rgb(31, 76, 32);
+    
+}
+
+.accordion-body {
+    background: #fff;
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    border-left: 4px solid #ffffff;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-item:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+} */
+
+</style>
+
+
 {% endblock %}
+

@@ -53,6 +53,7 @@
     }
 
     .banner-text {
+      margin-top: 100px;
         max-width: 90%;
         margin-left: 10px;
         text-align: center;
@@ -85,20 +86,18 @@
   padding: 0; */
 }
 
-/* Adjust text positioning */
 .banner-text {
-  position: relative;
-    z-index: 0; /* Ensure text appears above everything */
+    position: relative;
+    z-index: 0;
     color: #a8cd62;
     max-width: 50%; 
     margin-left: 30px; 
-    margin-top:30px;
+    margin-top:200px;
     text-align: left;
     padding: 20px; 
     animation: fadeInSlide 1s ease-out forwards;
 }
 
-/* Remove any unnecessary padding/margin */
 html, body {
   /* margin: 0;
   padding: 0; */
@@ -166,6 +165,7 @@ nav {
     padding-top: 40px;
     padding-left: 3%;
     padding-right: 10%;
+    background-color: #222E1C;
 }
 
 .nav-left {
@@ -580,15 +580,24 @@ select option[value=""] {
 }
 .hero1 {
     text-align: center;
-    padding: 50px 20px;
-    background: url('images/elly-m-y7mLAsTztQs-unsplash.jpg') no-repeat center center/cover;
+    /* padding: 50px 20px; */
+    background: url('/static/images/matir_jotno.jpg') no-repeat center center/cover;
     height: 370px;
     animation: fadeInSlide 1s ease-out forwards;
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  margin-top: -48px;
+  margin-left: -120px;
+  margin-right: -120px;
+
+  position: relative;
 
   }
   
   .hero1 h1 {
-    margin-top: 200px;
+    margin-top: 220px;
     font-size: 3rem;
     margin-bottom: 10px;
   }
@@ -623,6 +632,7 @@ select option[value=""] {
     border-radius: 10px;
     margin-top: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 1200px;
   }
   
   .article-form input,
@@ -693,11 +703,11 @@ select option[value=""] {
   }
   
   .faq-question {
-    background: #3a4f3a;
+    background: #c2dbc2;
     margin-left: 20px;
    
     border: none;
-    color: white;
+    color: black;
     width: 100%;
     text-align: left;
     cursor: pointer;
@@ -711,6 +721,7 @@ select option[value=""] {
     .faq-question:hover {
         transform: scale(1.02); /* Slight scaling, adjust as needed */
         background: #48644b; /* Darker background for hover */
+        color: white;
       }
       
       /* Add styling for expanded state */

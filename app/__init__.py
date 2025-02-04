@@ -6,12 +6,15 @@ from app.routes.api import api
 from app.extensions import db
 from app.utils import compile_scss_directory,scss_watchdog
 
+from app.crop_suggestion import predict_bp
+
 migrate = Migrate()
 
 def create_app():
     compile_scss_directory()
 
     app = Flask(__name__)
+    app.register_blueprint(predict_bp)
     app.config.from_object('config.Config')
 
     # watch for scss file changes and complie them on change

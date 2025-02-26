@@ -21,7 +21,10 @@ Crop Suggestion - Krishi Dibanishi
             <button class="bt" type="submit">পরামর্শ নিন</button>
         </form>
         
-        <div id="result"></div>
+        <div id="result" class="d-flex justify-content-center align-items-center flex-row">
+            <span id="crop-name" class="mb-3"></span>
+            <img src="" id="crop-image" alt="Crop Image" class="img-fluid rounded" style="width: 250px; height: 250px; object-fit: cover;">
+        </div>
     </div>
 {% endblock %}
 
@@ -91,11 +94,13 @@ Crop Suggestion - Krishi Dibanishi
         })
         .then(response => response.json())
         .then(result => {
-            document.getElementById('result').innerText = `প্রস্তাবিত ফসল: ${result.crop}`;
+            document.getElementById('crop-name').innerText = `প্রস্তাবিত ফসল: ${result.crop}`;
+            if (result.image) $('#crop-image').attr('src', result.image);
+            else $('#crop-image').attr('src', '');
         })
         .catch(error => {
             console.error('Error:', error);
-            document.getElementById('result').innerText = 'An error occurred. Please try again.';
+            document.getElementById('crop-name').innerText = 'An error occurred. Please try again.';
         });
     });
 </script>

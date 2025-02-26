@@ -63,4 +63,4 @@ def predict_crop():
     # Get the Bangla crop name
     bangla_crop = crop_mapping.get(crop.lower(), "Unknown crop")
     
-    return jsonify({'crop': bangla_crop})
+    return jsonify({'crop': bangla_crop, 'image': "/static/images/crops/" + crop + ".jpg"})

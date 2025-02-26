@@ -91,7 +91,7 @@ Crop Suggestion - Krishi Dibanishi
         })
         .then(response => response.json())
         .then(result => {
-            document.getElementById('result').innerText = `Recommended Crop: ${result.crop}`;
+            document.getElementById('result').innerText = `প্রস্তাবিত ফসল: ${result.crop}`;
         })
         .catch(error => {
             console.error('Error:', error);
